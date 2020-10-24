@@ -75,7 +75,7 @@ tracks/0/keys = {
 "values": [ 10, 11, 12, 13 ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=6]
 resource_name = "swing_left"
 length = 0.4
 tracks/0/type = "value"
@@ -115,8 +115,7 @@ tracks/2/keys = {
 "values": [ Vector2( -10.9317, -0.105112 ) ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "swing_right"
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -154,19 +153,17 @@ tracks/2/keys = {
 "values": [ Vector2( 7.93595, -0.105112 ) ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeAnimation" id=8]
 animation = "Idle Left"
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "Idle Right"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Run Left"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "Run Right"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=11]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=12]
 
@@ -178,26 +175,28 @@ animation = "Run Right"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=16]
 
-[sub_resource type="AnimationNodeStateMachine" id=17]
-"states/Idle Left/node" = SubResource( 7 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachine" id=18]
+"states/Idle Left/node" = SubResource( 8 )
 "states/Idle Left/position" = Vector2( -914.017, -404.012 )
-"states/Idle Right/node" = SubResource( 8 )
+"states/Idle Right/node" = SubResource( 9 )
 "states/Idle Right/position" = Vector2( -713.017, -404.012 )
-"states/Run Left/node" = SubResource( 9 )
+"states/Run Left/node" = SubResource( 10 )
 "states/Run Left/position" = Vector2( -1094.02, -404.012 )
-"states/Run Right/node" = SubResource( 10 )
+"states/Run Right/node" = SubResource( 11 )
 "states/Run Right/position" = Vector2( -509.017, -404.012 )
-transitions = [ "Run Left", "Idle Left", SubResource( 11 ), "Idle Left", "Idle Right", SubResource( 12 ), "Idle Right", "Run Right", SubResource( 13 ), "Run Right", "Idle Right", SubResource( 14 ), "Idle Right", "Idle Left", SubResource( 15 ), "Idle Left", "Run Left", SubResource( 16 ) ]
+transitions = [ "Run Left", "Idle Left", SubResource( 12 ), "Idle Left", "Idle Right", SubResource( 13 ), "Idle Right", "Run Right", SubResource( 14 ), "Run Right", "Idle Right", SubResource( 15 ), "Idle Right", "Idle Left", SubResource( 16 ), "Idle Left", "Run Left", SubResource( 17 ) ]
 start_node = "Idle Right"
 graph_offset = Vector2( -1979.02, -920.012 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=19]
 
-[sub_resource type="CapsuleShape2D" id=19]
+[sub_resource type="CapsuleShape2D" id=20]
 radius = 4.59472
 height = 4.15745
 
-[sub_resource type="RectangleShape2D" id=20]
+[sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 4.43705, 6.98882 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -218,25 +217,25 @@ frame = 38
 "anims/Idle Right" = SubResource( 3 )
 "anims/Run Left" = SubResource( 4 )
 "anims/Run Right" = SubResource( 5 )
-anims/swing_left = SubResource( 21 )
-anims/swing_right = SubResource( 6 )
+anims/swing_left = SubResource( 6 )
+anims/swing_right = SubResource( 7 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 17 )
+tree_root = SubResource( 18 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 18 )
+parameters/playback = SubResource( 19 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -0.998564, -0.420448 )
-shape = SubResource( 19 )
+shape = SubResource( 20 )
 
 [node name="SwordBox" type="Area2D" parent="."]
 position = Vector2( 1.52412, 0.105112 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordBox"]
 position = Vector2( -10.9317, -0.105112 )
-shape = SubResource( 20 )
+shape = SubResource( 21 )
 [connection signal="area_entered" from="SwordBox" to="." method="_on_SwordBox_area_entered"]
