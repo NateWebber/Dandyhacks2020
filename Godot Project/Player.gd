@@ -5,9 +5,13 @@ extends KinematicBody2D
 # var a = 2
 # var b = "text"
 var velocity = Vector2.ZERO
-var up_direction = Vector2(0, -1)
+
 var jumping = true
 var dir_last_moved = "Right"
+
+const max_speed = 60
+const acceleration = 1200
+const up_direction = Vector2(0, -1)
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
@@ -26,11 +30,15 @@ func _process(delta):
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	# grab an input vector based on left and right key input
 	
-	velocity = velocity.move_toward(input_vector * 60, 3)
+	#if the player should be falling, apply gravity
+	if jumping or (!is_on_floor()):
+		input_vector.y = 2.5
+	
+	velocity = velocity.move_toward(input_vector * max_speed, acceleration * delta)
 	
 	# if the player should be able to initiate a jump, launch them into the air
 	if(Input.get_action_strength("ui_up") > 0) && !jumping:
-		velocity.y -= 400
+		velocity.y -= 250
 		jumping = true
 	
 	# if moving left or right set animations correspondingly and note the direction we're moving
@@ -46,9 +54,6 @@ func _process(delta):
 		elif(dir_last_moved == "Left"):
 			animationState.travel("Idle Left")
 	
-	# if the player should be falling, apply gravity
-	if(!is_on_floor()):
-		velocity.y += 7.5
 	
 	if jumping:
 		print(velocity)
