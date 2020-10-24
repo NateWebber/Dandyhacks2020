@@ -54,10 +54,6 @@ func _process(delta):
 		elif(dir_last_moved == "Left"):
 			animationState.travel("Idle Left")
 	
-	
-	if jumping:
-		print(velocity)
-	
 	velocity = move_and_slide(velocity, up_direction, true, 4)
 	
 	if(velocity.y == 0):
