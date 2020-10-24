@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ruins_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/backgrounds/Dawn.png" type="Texture" id=3]
 [ext_resource path="res://test.gd" type="Script" id=4]
+[ext_resource path="res://src/enemies/green_slime.tscn" type="PackedScene" id=5]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 4 )
@@ -25,3 +26,6 @@ position = Vector2( 8.73969, 116.062 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 160, 120 )
 current = true
+
+[node name="green_slime" parent="." instance=ExtResource( 5 )]
+position = Vector2( 118.491, 112.691 )
