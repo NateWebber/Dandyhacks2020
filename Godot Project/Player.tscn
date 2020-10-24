@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.44136
-height = 0.688755
+height = 10.6173
 
 [sub_resource type="Animation" id=2]
 resource_name = "Idle Left"
@@ -203,7 +203,7 @@ extents = Vector2( 4.43705, 6.98882 )
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.0525579, 5.30816 )
+position = Vector2( 0, 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
