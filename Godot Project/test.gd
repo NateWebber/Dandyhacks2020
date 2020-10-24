@@ -19,8 +19,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if($Player.position.x > 160):
-		$Camera2D.position.x = $Player.position.x#80 + (int($Player.position.x / 8) * 8)
+		$Sprite.position.x = $Player.position.x
+		$Camera2D.position.x = $Player.position.x
 	else:
+		$Sprite.position.x = $Player.position.x
 		$Camera2D.position.x = 160
 	
 

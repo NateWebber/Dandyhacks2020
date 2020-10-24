@@ -7,8 +7,11 @@ extends KinematicBody2D
 var velocity = Vector2()
 var jumping = false
 export var run_speed = 100
-export var jump_speed = -200
+export var jump_speed = -200#-175
 export var gravity = 600
+#export var run_speed = 100
+#export var jump_speed = -500
+#export var gravity = 2400
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
