@@ -28,6 +28,7 @@ func hit():
 	health -= player.strength
 	if health < 1:
 		die()
+	#else:
 		
 func die():
 	print('I died!')

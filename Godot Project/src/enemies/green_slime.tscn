@@ -66,16 +66,19 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=7]
 
-[node name="green_slime" type="KinematicBody2D"]
+[node name="green_slime" type="KinematicBody2D" groups=[
+"enemies",
+]]
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 6
-frame = 2
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." groups=[
+"enemies",
+]]
 position = Vector2( 0.0662155, 0.397299 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]

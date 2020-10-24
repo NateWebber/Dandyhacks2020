@@ -7,6 +7,7 @@ extends KinematicBody2D
 var velocity = Vector2()
 var jumping = false
 var knocked = false
+var attacking = false
 export var run_speed = 100
 export var jump_speed = -200#-175
 export var gravity = 600
@@ -58,17 +59,20 @@ func _physics_process(delta):
 	if knocked and is_on_floor():
 		knocked = false
 	velocity = move_and_slide(velocity, UP_DIRECTION)
-	if(velocity.x > 0):
-		animationPlayer.play("Run Right")
-		dir_last_moved = "Right"
-	elif(velocity.x < 0):
-		animationPlayer.play("Run Left")
-		dir_last_moved = "Left"
-	else: # not moving, so just display the idle animation in the direction last moved
-		if(dir_last_moved == "Right"):
-			animationPlayer.play("Idle Right")
-		elif(dir_last_moved == "Left"):
-			animationPlayer.play("Idle Left")
+	if !attacking:
+		if(velocity.x > 0):
+			animationPlayer.play("Run Right")
+			dir_last_moved = "Right"
+		elif(velocity.x < 0):
+			animationPlayer.play("Run Left")
+			dir_last_moved = "Left"
+		else: # not moving, so just display the idle animation in the direction last moved
+			if(dir_last_moved == "Right"):
+				animationPlayer.play("Idle Right")
+			elif(dir_last_moved == "Left"):
+				animationPlayer.play("Idle Left")
+	if Input.is_action_just_pressed("attack") and !attacking:
+		attack()
 
 func hit(dmg, x_kb, y_kb, dir):
 	velocity.x = 0
@@ -86,3 +90,13 @@ func hit(dmg, x_kb, y_kb, dir):
 	$Hitbox/CollisionShape2D.disabled = false
 
 	
+
+func attack():
+	attacking = true
+	animationPlayer.play("swing_right")
+	yield(animationPlayer, "animation_finished")
+	attacking = false
+
+func _on_SwordBox_area_entered(area):
+	if area.is_in_group("enemies"):
+		area.get_parent().hit()
