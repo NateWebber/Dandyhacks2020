@@ -7,7 +7,7 @@
 radius = 6.07013
 height = 0.0
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=2]
 resource_name = "Idle Left"
 loop = true
 step = 0.5
@@ -24,7 +24,7 @@ tracks/0/keys = {
 "values": [ 15, 16 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=3]
 resource_name = "Idle Right"
 loop = true
 step = 0.5
@@ -41,8 +41,7 @@ tracks/0/keys = {
 "values": [ 10, 11 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Run Left"
+[sub_resource type="Animation" id=4]
 loop = true
 step = 0.25
 tracks/0/type = "value"
@@ -58,7 +57,7 @@ tracks/0/keys = {
 "values": [ 15, 16, 17, 18 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=5]
 loop = true
 step = 0.25
 tracks/0/type = "value"
@@ -74,17 +73,21 @@ tracks/0/keys = {
 "values": [ 10, 11, 12, 13 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=6]
 animation = "Idle Left"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=7]
 animation = "Idle Right"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=8]
 animation = "Run Left"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "Run Right"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=12]
 
@@ -94,24 +97,20 @@ animation = "Run Right"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=15]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
-
-[sub_resource type="AnimationNodeStateMachine" id=4]
-"states/Idle Left/node" = SubResource( 8 )
+[sub_resource type="AnimationNodeStateMachine" id=16]
+"states/Idle Left/node" = SubResource( 6 )
 "states/Idle Left/position" = Vector2( -914.017, -404.012 )
-"states/Idle Right/node" = SubResource( 9 )
+"states/Idle Right/node" = SubResource( 7 )
 "states/Idle Right/position" = Vector2( -713.017, -404.012 )
-"states/Run Left/node" = SubResource( 10 )
+"states/Run Left/node" = SubResource( 8 )
 "states/Run Left/position" = Vector2( -1094.02, -404.012 )
-"states/Run Right/node" = SubResource( 11 )
+"states/Run Right/node" = SubResource( 9 )
 "states/Run Right/position" = Vector2( -509.017, -404.012 )
-transitions = [ "Run Left", "Idle Left", SubResource( 12 ), "Idle Left", "Idle Right", SubResource( 13 ), "Idle Right", "Run Right", SubResource( 14 ), "Run Right", "Idle Right", SubResource( 15 ), "Idle Right", "Idle Left", SubResource( 16 ), "Idle Left", "Run Left", SubResource( 17 ) ]
+transitions = [ "Run Left", "Idle Left", SubResource( 10 ), "Idle Left", "Idle Right", SubResource( 11 ), "Idle Right", "Run Right", SubResource( 12 ), "Run Right", "Idle Right", SubResource( 13 ), "Idle Right", "Idle Left", SubResource( 14 ), "Idle Left", "Run Left", SubResource( 15 ) ]
 start_node = "Idle Right"
 graph_offset = Vector2( -1979.02, -920.012 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=5]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=17]
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -123,15 +122,15 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 vframes = 12
 hframes = 5
-frame = 10
+frame = 16
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/Idle Left" = SubResource( 7 )
-"anims/Idle Right" = SubResource( 6 )
-"anims/Run Left" = SubResource( 2 )
-"anims/Run Right" = SubResource( 3 )
+"anims/Idle Left" = SubResource( 2 )
+"anims/Idle Right" = SubResource( 3 )
+"anims/Run Left" = SubResource( 4 )
+"anims/Run Right" = SubResource( 5 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 4 )
+tree_root = SubResource( 16 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 5 )
+parameters/playback = SubResource( 17 )

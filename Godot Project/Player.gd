@@ -30,7 +30,7 @@ func _process(delta):
 	
 	# if the player should be able to initiate a jump, launch them into the air
 	if(Input.get_action_strength("ui_up") > 0) && !jumping:
-		velocity.y -= 200
+		velocity.y -= 400
 		jumping = true
 	
 	# if moving left or right set animations correspondingly and note the direction we're moving
@@ -50,6 +50,8 @@ func _process(delta):
 	if(!is_on_floor()):
 		velocity.y += 7.5
 	
+	if jumping:
+		print(velocity)
 	
 	velocity = move_and_slide(velocity, up_direction, true, 4)
 	

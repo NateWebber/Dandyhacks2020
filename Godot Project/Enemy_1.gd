@@ -1,7 +1,11 @@
 extends KinematicBody2D
 
-#Find the player 
+#find the player 
 onready var Player = get_parent().get_node("Player")
+#animation stuff
+onready var animationPlayer = $AnimationPlayer
+onready var animationTree = $AnimationTree
+onready var animationState = animationTree.get("parameters/playback")
 
 var vel = Vector2(0, 0)
 var up_direction = Vector2(0, -1)
@@ -32,6 +36,10 @@ func _process(delta):
 
 	if OS.get_ticks_msec() > next_dir_time:
 		dir = next_dir
+		if dir == -1:
+			animationPlayer.play("walk_left")
+		else:
+			animationPlayer.play("walk_right")
 
 	#gravity i guess
 	if(!is_on_floor()):

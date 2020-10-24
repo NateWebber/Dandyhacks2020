@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Enemy_1.gd" type="Script" id=1]
 [ext_resource path="res://assets/MiniWorldSprites/Characters/Monsters/Slime.png" type="Texture" id=2]
@@ -7,7 +7,7 @@
 radius = 6.37997
 
 [sub_resource type="Animation" id=2]
-resource_name = "walk"
+resource_name = "walk_left"
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -23,13 +23,39 @@ tracks/0/keys = {
 "values": [ 6, 7 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=3]
-animation = "walk"
+[sub_resource type="Animation" id=6]
+resource_name = "walk_right"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 12, 13 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "walk_left"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "walk_right"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
 
 [sub_resource type="AnimationNodeStateMachine" id=4]
-states/walk/node = SubResource( 3 )
-states/walk/position = Vector2( 180, 56 )
-start_node = "walk"
+states/walk_left/node = SubResource( 7 )
+states/walk_left/position = Vector2( 137, 63 )
+states/walk_right/node = SubResource( 8 )
+states/walk_right/position = Vector2( 301, 106 )
+transitions = [ "walk_left", "walk_right", SubResource( 9 ), "walk_right", "walk_left", SubResource( 10 ) ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=5]
 
@@ -40,13 +66,14 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 6
-frame = 6
+frame = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/walk = SubResource( 2 )
+anims/walk_left = SubResource( 2 )
+anims/walk_right = SubResource( 6 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 4 )
