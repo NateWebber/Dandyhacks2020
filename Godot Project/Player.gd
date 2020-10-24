@@ -50,8 +50,8 @@ func _process(delta):
 	if(!is_on_floor()):
 		velocity.y += 7.5
 	
-	if jumping:
-		print(velocity)
+	#if jumping:
+		#print(velocity)
 	
 	velocity = move_and_slide(velocity, up_direction, true, 4)
 	
