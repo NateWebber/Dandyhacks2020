@@ -18,21 +18,26 @@ var dir = 0
 var next_dir = 0
 var next_dir_time = 0
 
+#distance from player threshhold before stopping
+var offset = 50
+
 #func _ready():
 	#$CollisionShape2D.disabled = true
+
+func set_dir(target_dir):
+	if next_dir != target_dir:
+		next_dir = target_dir
+		next_dir_time = OS.get_ticks_msec() + react_time
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 
-	if Player.position.x < position.x and next_dir != -1:
-		next_dir = -1
-		next_dir_time = OS.get_ticks_msec() + react_time
-	elif Player.position.x > position.x and next_dir != 1:
-		next_dir = 1
-		next_dir_time = OS.get_ticks_msec() + react_time
-	elif Player.position.x == position.x and next_dir != 0:
-		next_dir = 0
-		next_dir_time = OS.get_ticks_msec() + react_time
+	if Player.position.x < position.x - offset:
+		set_dir(-1)
+	elif Player.position.x > position.x +  offset:
+		set_dir(1)
+	else:
+		set_dir(0)
 
 	if OS.get_ticks_msec() > next_dir_time:
 		dir = next_dir
