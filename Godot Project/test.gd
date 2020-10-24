@@ -7,8 +7,10 @@ extends Node2D
 
 	
 var rng = RandomNumberGenerator.new()
+const PLATFORM_CHANCE = .05
 
-var current_height = 0
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	new_game()
@@ -26,6 +28,12 @@ func new_game():
 
 func generate_terrain():
 	var current_slice = load("res://terrainGen/floor outside.gd") #first slice should always be ground
+	var current_height = 0
+	
+	var generating_platforms = false
+	var current_platform_slice
+	var platform_height
+	
 	
 	for x in range(1, 100): # iterate over vertical slices
 		rng.randomize()
@@ -38,8 +46,6 @@ func generate_terrain():
 		
 		if !current_slice.leading_height_change: # no leading height change so height should be changed now
 			current_height -= current_slice.delta_height
-		
-		
 		
 		var probability = rng.randi_range(0, 100)
 		if(current_slice == load("./terrainGen/floor outside.gd")):
@@ -56,17 +62,43 @@ func generate_terrain():
 			if(current_height < 0): # decreasingly likely to get downwards ramps as generation moves lower
 				probability += (-2 * current_height)
 		
-		
-			
-		print(probability)
 		var running_total = 0
 		var probability_scan_index = -1
+		# scan through the next possible slices for the ground
 		for scan_index in range(0, len(current_slice.weights)):
-			running_total += current_slice.weights[scan_index]
-			if(running_total >= probability):
-				var loadString = "./terrainGen/" + current_slice.next_tiles[scan_index] + ".gd"
+			running_total += current_slice.weights[scan_index] # keep a running total of the probability numbers
+			if(running_total >= probability): # once this total exceeds our random roll, we have chosen the next slice\
+				# grab the next slice's script and load it
+				var loadString = "./terrainGen/" + current_slice.next_tiles[scan_index] + ".gd" 
 				current_slice = load(loadString)
 				break
+		
+		
+		
+		if(!generating_platforms && current_slice.platform_startable):
+			if(rng.randf() < PLATFORM_CHANCE):
+				generating_platforms = true
+				current_platform_slice = load("./terrainGen/floating platform left.gd")
+				platform_height = current_height + rng.randi_range(3, 5) + 12
+		elif(generating_platforms):
+			var platform_reference_x = current_platform_slice.reference_x
+			$TileMap.set_cell(x, platform_height, $TileMap.get_cell(platform_reference_x, 0))
+			
+			probability = rng.randi_range(0, 100)
+			running_total = 0
+			probability_scan_index = -1
+			# scan through the next possible slices for the platform
+			for scan_index in range(0, len(current_platform_slice.weights)):
+				running_total += current_platform_slice.weights[scan_index] # keep a running total of the probability numbers
+				if(running_total >= probability): # once this total exceeds our random roll, we have chosen the next platform
+					# grab the next platform's script and load it
+					if(current_platform_slice.next_tiles[scan_index] == "END"):
+						generating_platforms = false
+					var loadString = "./terrainGen/" + current_platform_slice.next_tiles[scan_index] + ".gd" 
+					current_platform_slice = load(loadString)
+					break
+			
+			
 		
 	
 		
