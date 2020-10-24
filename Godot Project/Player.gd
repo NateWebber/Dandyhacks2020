@@ -16,6 +16,7 @@ const UP_DIRECTION = Vector2(0, -1)
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
+var dir_last_moved = "Right"
 
 #current health
 var health
@@ -58,16 +59,16 @@ func _physics_process(delta):
 		knocked = false
 	velocity = move_and_slide(velocity, UP_DIRECTION)
 	if(velocity.x > 0):
-		animationState.travel("Run Right")
-		#dir_last_moved = "Right"
+		animationPlayer.play("Run Right")
+		dir_last_moved = "Right"
 	elif(velocity.x < 0):
-		animationState.travel("Run Left")
-		#dir_last_moved = "Left"
-	#else: # not moving, so just display the idle animation in the direction last moved
-		#if(dir_last_moved == "Right"):
-		#	animationState.travel("Idle Right")
-		#elif(dir_last_moved == "Left"):
-		#	animationState.travel("Idle Left")
+		animationPlayer.play("Run Left")
+		dir_last_moved = "Left"
+	else: # not moving, so just display the idle animation in the direction last moved
+		if(dir_last_moved == "Right"):
+			animationPlayer.play("Idle Right")
+		elif(dir_last_moved == "Left"):
+			animationPlayer.play("Idle Left")
 
 func hit(dmg, x_kb, y_kb, dir):
 	velocity.x = 0

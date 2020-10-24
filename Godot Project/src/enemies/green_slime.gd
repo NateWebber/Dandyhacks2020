@@ -1,7 +1,9 @@
 extends Enemy
 
+#animation stuff
+onready var animationPlayer = get_node("AnimationPlayer")
 #delay before running at the player
-var react_time = 250
+var react_time = 1000
 
 #direction handling
 var dir = 0
@@ -43,10 +45,12 @@ func _physics_process(delta):
 	#gravity i guess
 	vel.y += gravity * delta
 
-	#if dir == -1:
-	#	animationPlayer.play("walk_left")
-	#elif dir == 1:
-	#	animationPlayer.play("walk_right")
+	if dir == -1:
+		animationPlayer.play("left")
+	elif dir == 1:
+		animationPlayer.play("right")
+	else:
+		animationPlayer.play("idle")
 
 	vel = move_and_slide(vel, up_direction)
 
