@@ -3,12 +3,13 @@
 [ext_resource path="res://Enemy_1.gd" type="Script" id=1]
 [ext_resource path="res://assets/MiniWorldSprites/Characters/Monsters/Slime.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 6.37997
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 3.70172
+height = 0.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "walk_left"
-length = 0.4
+length = 0.6
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -17,15 +18,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 6, 7 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=3]
 resource_name = "walk_right"
-length = 0.4
+length = 0.6
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -34,30 +35,30 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 12, 13 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeAnimation" id=4]
 animation = "walk_left"
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=5]
 animation = "walk_right"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+[sub_resource type="AnimationNodeStateMachineTransition" id=6]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+[sub_resource type="AnimationNodeStateMachineTransition" id=7]
 
-[sub_resource type="AnimationNodeStateMachine" id=4]
-states/walk_left/node = SubResource( 7 )
+[sub_resource type="AnimationNodeStateMachine" id=8]
+states/walk_left/node = SubResource( 4 )
 states/walk_left/position = Vector2( 137, 63 )
-states/walk_right/node = SubResource( 8 )
+states/walk_right/node = SubResource( 5 )
 states/walk_right/position = Vector2( 301, 106 )
-transitions = [ "walk_left", "walk_right", SubResource( 9 ), "walk_right", "walk_left", SubResource( 10 ) ]
+transitions = [ "walk_left", "walk_right", SubResource( 6 ), "walk_right", "walk_left", SubResource( 7 ) ]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=5]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=9]
 
 [node name="Enemy_1" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -66,16 +67,17 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 6
-frame = 14
+frame = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.0606041, 0.528659 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/walk_left = SubResource( 2 )
-anims/walk_right = SubResource( 6 )
+anims/walk_right = SubResource( 3 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 4 )
+tree_root = SubResource( 8 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 5 )
+parameters/playback = SubResource( 9 )
