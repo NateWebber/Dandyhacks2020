@@ -8,10 +8,14 @@ var velocity = Vector2.ZERO
 var up_direction = Vector2(0, -1)
 var jumping = true
 
+onready var animationPlayer = $AnimationPlayer
+onready var animationTree = $AnimationTree
+onready var animationState = animationTree.get("parameters/playback")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	animationTree.active = true # activate the animation tree
 
 
 
@@ -23,14 +27,21 @@ func _process(delta):
 	#input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
 	
-	velocity = velocity.move_toward(input_vector * 100, 3)
+	velocity = velocity.move_toward(input_vector * 60, 3)
 	
 	if(Input.get_action_strength("ui_up") > 0) && !jumping:
 		velocity.y -= 200
 		jumping = true
 	
+	if(velocity.x == 0):
+		animationState.travel("Stand")
+	elif(velocity.x > 0):
+		animationState.travel("Run Right")
+	else:
+		animationState.travel("Run Left")
+	
 	if(!is_on_floor()):
-		velocity.y += 5
+		velocity.y += 7.5
 		
 	
 	
