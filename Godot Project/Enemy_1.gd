@@ -11,15 +11,19 @@ var vel = Vector2(0, 0)
 var up_direction = Vector2(0, -1)
 
 #delay before running at the player
-var react_time = 400
+var react_time = 250
 
-
+#direction handling
 var dir = 0
 var next_dir = 0
 var next_dir_time = 0
 
 #distance from player threshhold before stopping
-var offset = 50
+var offset = 10
+
+
+#speed modifier
+var speed = 50
 
 #func _ready():
 	#$CollisionShape2D.disabled = true
@@ -41,16 +45,17 @@ func _process(delta):
 
 	if OS.get_ticks_msec() > next_dir_time:
 		dir = next_dir
-		if dir == -1:
-			animationPlayer.play("walk_left")
-		else:
-			animationPlayer.play("walk_right")
 
 	#gravity i guess
 	if(!is_on_floor()):
 		vel.y += 7.5
 
-	vel.x = dir * 100
+	vel.x = dir * speed
+
+	if dir == -1:
+		animationPlayer.play("walk_left")
+	elif dir == 1:
+		animationPlayer.play("walk_right")
 
 	vel = move_and_slide(vel, up_direction, false, 4)
 
