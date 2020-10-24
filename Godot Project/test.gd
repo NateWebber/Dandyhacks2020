@@ -11,8 +11,20 @@ var rng = RandomNumberGenerator.new()
 var current_height = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-func fuck():
+	new_game()
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if($Player.position.x > 160):
+		$Camera2D.position.x = $Player.position.x
+	else:
+		$Camera2D.position.x = 160
+	
+
+func new_game():
+	generate_terrain()
+
+func generate_terrain():
 	var current_slice = load("res://terrainGen/floor outside.gd")
 	
 	for x in range(1, 100):
@@ -61,11 +73,3 @@ func fuck():
 		print()	
 			
 	$TileMap.update_bitmask_region(Vector2(0, 0), Vector2(100, 30))
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if($Player.position.x > 160):
-		$Camera2D.position.x = $Player.position.x
-	else:
-		$Camera2D.position.x = 160
-	
