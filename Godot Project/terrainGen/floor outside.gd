@@ -5,15 +5,15 @@ extends Node
 # var a = 2
 # var b = "text"
 
-const next_tiles = ["ramp up", "floor"]
-const weights = [50, 50]
-const reference_x = -34
-const delta_height = 1
-const leading_height_change = true
+const next_tiles = ["ramp up outside", "floor outside", "ramp down outside"]
+const weights = [13, 75, 12]
+const reference_x = -32
+const delta_height = 0
+const leading_height_change = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

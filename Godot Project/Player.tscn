@@ -3,7 +3,7 @@
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/MiniWorldSprites/Characters/Soldiers/Melee/SwordsmanTemplate.png" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=18]
 radius = 6.07013
 height = 0.0
 
@@ -116,7 +116,7 @@ graph_offset = Vector2( -1979.02, -920.012 )
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 18 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

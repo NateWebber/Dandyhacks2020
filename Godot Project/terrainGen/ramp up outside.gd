@@ -5,11 +5,11 @@ extends Node
 # var a = 2
 # var b = "text"
 
-const next_tiles = ["ramp down", "floor"]
-const weights = [50, 50]
-const reference_x = -33
-const delta_height = -1
-const leading_height_change = false
+const next_tiles = ["ramp up outside", "floor outside"]
+const weights = [20, 80]
+const reference_x = -34
+const delta_height = 1
+const leading_height_change = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

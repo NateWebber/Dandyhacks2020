@@ -11,28 +11,26 @@ var dir_last_moved = "Right"
 
 const max_speed = 60
 const acceleration = 1200
-const up_direction = Vector2(0, -1)
+const up_direction = Vector2(0, -100)
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
+var snap = Vector2(0, 2.5)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	animationTree.active = true # activate the animation tree
 
-
+var input_vector = Vector2.ZERO
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	# grab an input vector based on left and right key input
 	
-	#if the player should be falling, apply gravity
-	if jumping or (!is_on_floor()):
-		input_vector.y = 2.5
+	
 	
 	velocity = velocity.move_toward(input_vector * max_speed, acceleration * delta)
 	
@@ -54,8 +52,14 @@ func _process(delta):
 		elif(dir_last_moved == "Left"):
 			animationState.travel("Idle Left")
 	
-	velocity = move_and_slide(velocity, up_direction, true, 4)
+	velocity = move_and_slide_with_snap(velocity, Vector2(0, 100), up_direction, true, 100)		
 	
-	if(velocity.y == 0):
+	
+	input_vector = Vector2.ZERO
+	#print(is_on_floor())
+	if(is_on_floor() && jumping):
 		jumping = false
-	
+	elif(!is_on_floor()):
+		input_vector.y += 2.5
+	elif jumping:
+		input_vector.y += 2.5
