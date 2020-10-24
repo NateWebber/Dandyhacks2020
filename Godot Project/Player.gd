@@ -42,9 +42,9 @@ func _process(delta):
 		dir_last_moved = "Left"
 	else:
 		if(dir_last_moved == "Right"):
-			animationState.travel("Stand")
+			animationState.travel("Idle Right")
 		elif(dir_last_moved == "Left"):
-			animationState.travel("Stand Left")
+			animationState.travel("Idle Left")
 		
 		
 	
