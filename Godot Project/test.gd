@@ -7,7 +7,7 @@ extends Node2D
 
 	
 var rng = RandomNumberGenerator.new()
-const PLATFORM_CHANCE = 0.99
+const PLATFORM_CHANCE = 0.05
 
 
 # Called when the node enters the scene tree for the first time.
