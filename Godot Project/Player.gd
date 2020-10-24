@@ -19,41 +19,40 @@ func _ready():
 	animationTree.active = true # activate the animation tree
 
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	#input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	input_vector = input_vector.normalized()
+	# grab an input vector based on left and right key input
 	
 	velocity = velocity.move_toward(input_vector * 60, 3)
 	
+	# if the player should be able to initiate a jump, launch them into the air
 	if(Input.get_action_strength("ui_up") > 0) && !jumping:
 		velocity.y -= 200
 		jumping = true
 	
+	# if moving left or right set animations correspondingly and note the direction we're moving
 	if(velocity.x > 0):
 		animationState.travel("Run Right")
 		dir_last_moved = "Right"
 	elif(velocity.x < 0):
 		animationState.travel("Run Left")
 		dir_last_moved = "Left"
-	else:
+	else: # not moving, so just display the idle animation in the direction last moved
 		if(dir_last_moved == "Right"):
 			animationState.travel("Idle Right")
 		elif(dir_last_moved == "Left"):
 			animationState.travel("Idle Left")
-		
-		
 	
+	# if the player should be falling, apply gravity
 	if(!is_on_floor()):
 		velocity.y += 7.5
-		
 	
 	
-	velocity = move_and_slide(velocity, up_direction, false, 4)#PI/3.9)
+	velocity = move_and_slide(velocity, up_direction, true, 4)
 	
 	if(velocity.y == 0):
 		jumping = false
+	
