@@ -38,7 +38,7 @@ func generate_terrain():
 	var in_cave = false
 	var in_temple = false
 	
-	for x in range(1, 1000): # iterate over vertical slices
+	for x in range(1, 500): # iterate over vertical slices
 		rng.randomize()
 		var reference_x = current_slice.reference_x # get the x value on the tilemap from which to copy this slice
 		if current_slice.leading_height_change: # if the slice requires a leading height change (such as slope up), execute it
@@ -66,6 +66,7 @@ func generate_terrain():
 				probability += (-2 * current_height)
 		elif(current_slice == load("./terrainGen/floor cave.gd")):
 			in_cave = true
+			print("CAVE!")
 			
 		if(in_cave):
 			for y in range(0, 30):
@@ -108,11 +109,6 @@ func generate_terrain():
 					var loadString = "res://terrainGen/" + current_platform_slice.next_tiles[scan_index] + ".gd" 
 					current_platform_slice = load(loadString)
 					break
-			
-			
-		
-	
-		
-		print()	
+
 			
 	$TileMap.update_bitmask_region(Vector2(-1, -1), Vector2(1000, 30))
