@@ -64,7 +64,6 @@ func _physics_process(delta):
 		knocked = false
 	velocity = move_and_slide(velocity, UP_DIRECTION)
 	if !attacking:
-		animationPlayer.play()
 		if(velocity.x > 0):
 			animationState.travel("Run Right")
 			dir_last_moved = "Right"

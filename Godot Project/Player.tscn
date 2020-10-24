@@ -1,7 +1,7 @@
 [gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://assets/MiniWorldSprites/Characters/Soldiers/Melee/AxemanTemplate.png" type="Texture" id=2]
+[ext_resource path="res://assets/MiniWorldSprites/Characters/Soldiers/Melee/RedMelee/AxemanRed.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.44136
@@ -75,7 +75,7 @@ tracks/0/keys = {
 "values": [ 12, 13, 14, 15 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 resource_name = "swing"
 length = 0.7
 step = 0.05
@@ -130,8 +130,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "swing_left"
+[sub_resource type="Animation" id=7]
 length = 0.45
 step = 0.05
 tracks/0/type = "value"
@@ -185,7 +184,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=8]
 resource_name = "Idle Left"
 loop = true
 step = 0.5
@@ -202,7 +201,7 @@ tracks/0/keys = {
 "values": [ 15, 16 ]
 }
 
-[sub_resource type="Animation" id=38]
+[sub_resource type="Animation" id=9]
 resource_name = "Idle Right"
 loop = true
 step = 0.5
@@ -219,7 +218,7 @@ tracks/0/keys = {
 "values": [ 10, 11 ]
 }
 
-[sub_resource type="Animation" id=39]
+[sub_resource type="Animation" id=10]
 length = 0.5
 loop = true
 step = 0.125
@@ -236,7 +235,7 @@ tracks/0/keys = {
 "values": [ 15, 16, 17, 18 ]
 }
 
-[sub_resource type="Animation" id=40]
+[sub_resource type="Animation" id=11]
 length = 0.5
 loop = true
 step = 0.125
@@ -253,7 +252,7 @@ tracks/0/keys = {
 "values": [ 10, 11, 12, 13 ]
 }
 
-[sub_resource type="Animation" id=41]
+[sub_resource type="Animation" id=12]
 resource_name = "swing"
 length = 0.7
 step = 0.05
@@ -308,7 +307,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=42]
+[sub_resource type="Animation" id=13]
 resource_name = "swing_left"
 length = 0.45
 step = 0.05
@@ -363,63 +362,63 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "Idle Left"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "Idle Right"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Run Left"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "Run Right"
 
-[sub_resource type="AnimationNodeAnimation" id=32]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "swing"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=18]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=19]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
-[sub_resource type="AnimationNodeStateMachine" id=28]
-"states/Idle Left/node" = SubResource( 8 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+
+[sub_resource type="AnimationNodeStateMachine" id=29]
+"states/Idle Left/node" = SubResource( 14 )
 "states/Idle Left/position" = Vector2( -914.017, -404.012 )
-"states/Idle Right/node" = SubResource( 9 )
+"states/Idle Right/node" = SubResource( 15 )
 "states/Idle Right/position" = Vector2( -713.017, -404.012 )
-"states/Run Left/node" = SubResource( 10 )
+"states/Run Left/node" = SubResource( 16 )
 "states/Run Left/position" = Vector2( -1094.02, -404.012 )
-"states/Run Right/node" = SubResource( 11 )
+"states/Run Right/node" = SubResource( 17 )
 "states/Run Right/position" = Vector2( -509.017, -404.012 )
-states/swing/node = SubResource( 32 )
+states/swing/node = SubResource( 18 )
 states/swing/position = Vector2( -841.06, -518.15 )
-transitions = [ "Run Left", "Idle Left", SubResource( 14 ), "Idle Left", "Idle Right", SubResource( 15 ), "Idle Right", "Run Right", SubResource( 16 ), "Run Right", "Idle Right", SubResource( 17 ), "Idle Right", "Idle Left", SubResource( 18 ), "Idle Left", "Run Left", SubResource( 19 ), "swing", "Idle Left", SubResource( 33 ), "swing", "Idle Right", SubResource( 34 ), "Idle Right", "swing", SubResource( 35 ), "Idle Left", "swing", SubResource( 36 ) ]
+transitions = [ "Run Left", "Idle Left", SubResource( 19 ), "Idle Left", "Idle Right", SubResource( 20 ), "Idle Right", "Run Right", SubResource( 21 ), "Run Right", "Idle Right", SubResource( 22 ), "Idle Right", "Idle Left", SubResource( 23 ), "Idle Left", "Run Left", SubResource( 24 ), "swing", "Idle Left", SubResource( 25 ), "swing", "Idle Right", SubResource( 26 ), "Idle Right", "swing", SubResource( 27 ), "Idle Left", "swing", SubResource( 28 ) ]
 start_node = "Idle Right"
 graph_offset = Vector2( -2146.06, -557.15 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=29]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=30]
 
-[sub_resource type="CapsuleShape2D" id=30]
+[sub_resource type="CapsuleShape2D" id=31]
 radius = 4.59472
 height = 4.15745
 
-[sub_resource type="RectangleShape2D" id=31]
+[sub_resource type="RectangleShape2D" id=32]
 extents = Vector2( 4.43705, 6.98882 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -441,33 +440,33 @@ frame = 14
 "anims/Idle Right" = SubResource( 3 )
 "anims/Run Left" = SubResource( 4 )
 "anims/Run Right" = SubResource( 5 )
-anims/swing = SubResource( 7 )
-anims/swing_left = SubResource( 6 )
+anims/swing = SubResource( 6 )
+anims/swing_left = SubResource( 7 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
-"anims/Idle Left" = SubResource( 37 )
-"anims/Idle Right" = SubResource( 38 )
-"anims/Run Left" = SubResource( 39 )
-"anims/Run Right" = SubResource( 40 )
-anims/swing = SubResource( 41 )
-anims/swing_left = SubResource( 42 )
+"anims/Idle Left" = SubResource( 8 )
+"anims/Idle Right" = SubResource( 9 )
+"anims/Run Left" = SubResource( 10 )
+"anims/Run Right" = SubResource( 11 )
+anims/swing = SubResource( 12 )
+anims/swing_left = SubResource( 13 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 28 )
+tree_root = SubResource( 29 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 29 )
+parameters/playback = SubResource( 30 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -0.998564, -0.420448 )
-shape = SubResource( 30 )
+shape = SubResource( 31 )
 
 [node name="SwordBox" type="Area2D" parent="."]
 position = Vector2( 1.52412, 0.105112 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordBox"]
-shape = SubResource( 31 )
+shape = SubResource( 32 )
 disabled = true
 [connection signal="area_entered" from="SwordBox" to="." method="_on_SwordBox_area_entered"]
