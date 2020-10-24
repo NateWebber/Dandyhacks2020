@@ -19,10 +19,6 @@ config/name="DandyHacks Game"
 run/main_scene="res://test.tscn"
 config/icon="res://icon.png"
 
-[debug]
-
-settings/fps/force_fps=120
-
 [display]
 
 window/size/width=320

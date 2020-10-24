@@ -65,7 +65,6 @@ func generate_terrain():
 				probability += (-2 * current_height)
 		
 		var running_total = 0
-		var probability_scan_index = -1
 		# scan through the next possible slices for the ground
 		for scan_index in range(0, len(current_slice.weights)):
 			running_total += current_slice.weights[scan_index] # keep a running total of the probability numbers
@@ -80,18 +79,17 @@ func generate_terrain():
 		if(!generating_platforms && current_slice.platform_startable):
 			if(rng.randf() < PLATFORM_CHANCE):
 				generating_platforms = true
-				current_platform_slice = load("./terrainGen/floating platform left.gd")
+				current_platform_slice = load("res://terrainGen/floating platform left.gd")
 				platform_height = current_height + 15
 		elif(generating_platforms):
 			if(current_height + 2 == platform_height):
-				if(current_platform_slice != load("./terrainGen/floating platform left")):
-					current_platform_slice = load("./terrainGen/floating platform right")
+				if(current_platform_slice != load("res://terrainGen/floating platform left")):
+					current_platform_slice = load("res://terrainGen/floating platform right")
 			var platform_reference_x = current_platform_slice.reference_x
 			$TileMap.set_cell(x, platform_height, $TileMap.get_cell(platform_reference_x, 0))
 			
 			probability = rng.randi_range(0, 100)
 			running_total = 0
-			probability_scan_index = -1
 			# scan through the next possible slices for the platform
 			for scan_index in range(0, len(current_platform_slice.weights)):
 				running_total += current_platform_slice.weights[scan_index] # keep a running total of the probability numbers
@@ -99,7 +97,8 @@ func generate_terrain():
 					# grab the next platform's script and load it
 					if(current_platform_slice.next_tiles[scan_index] == "END"):
 						generating_platforms = false
-					var loadString = "./terrainGen/" + current_platform_slice.next_tiles[scan_index] + ".gd" 
+						break
+					var loadString = "res://terrainGen/" + current_platform_slice.next_tiles[scan_index] + ".gd" 
 					current_platform_slice = load(loadString)
 					break
 			
