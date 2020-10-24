@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/MiniWorldSprites/Characters/Soldiers/Melee/SwordsmanTemplate.png" type="Texture" id=2]
@@ -55,6 +55,30 @@ tracks/0/keys = {
 "values": [ 10, 11, 12, 13 ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Idle Left"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Idle Right"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Run Left"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+
+[sub_resource type="AnimationNodeStateMachine" id=12]
+"states/Idle Left/node" = SubResource( 7 )
+"states/Idle Left/position" = Vector2( 277, 63 )
+"states/Idle Right/node" = SubResource( 8 )
+"states/Idle Right/position" = Vector2( 468, 63 )
+"states/Run Left/node" = SubResource( 9 )
+"states/Run Left/position" = Vector2( 290, 149 )
+transitions = [ "Idle Left", "Idle Right", SubResource( 10 ), "Idle Left", "Run Left", SubResource( 11 ) ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -65,7 +89,7 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 vframes = 12
 hframes = 5
-frame = 10
+frame = 15
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 "anims/Idle Left" = SubResource( 2 )
@@ -73,4 +97,6 @@ frame = 10
 "anims/Run Left" = SubResource( 4 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 12 )
 anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 6 )
