@@ -7,8 +7,8 @@ extends KinematicBody2D
 var velocity = Vector2()
 var jumping = false
 export var run_speed = 100
-export var jump_speed = -100
-export var gravity = 24000
+export var jump_speed = -200
+export var gravity = 600
 const UP_DIRECTION = Vector2(0, -1)
 var snapVector = Vector2(0, 8)
 
@@ -26,7 +26,7 @@ func get_input():
 	velocity.x = 0
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
-	var jump = Input.is_action_just_pressed("ui_up")
+	var jump = Input.is_action_pressed("ui_up")
 	
 	if jump and is_on_floor():
 		jumping = true
