@@ -8,14 +8,15 @@ var velocity = Vector2()
 var jumping = false
 var knocked = false
 var attacking = false
-export var run_speed = 100
-export var jump_speed = -200#-175
+export var run_speed = 75
+export var jump_speed = -200
 export var gravity = 600
 
 const UP_DIRECTION = Vector2(0, -1)
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
+
 onready var animationState = animationTree.get("parameters/playback")
 var dir_last_moved = "Right"
 
@@ -63,19 +64,24 @@ func _physics_process(delta):
 		knocked = false
 	velocity = move_and_slide(velocity, UP_DIRECTION)
 	if !attacking:
+		animationPlayer.play()
 		if(velocity.x > 0):
-			animationPlayer.play("Run Right")
+			animationState.travel("Run Right")
 			dir_last_moved = "Right"
 		elif(velocity.x < 0):
-			animationPlayer.play("Run Left")
+			animationState.travel("Run Left")
 			dir_last_moved = "Left"
 		else: # not moving, so just display the idle animation in the direction last moved
 			if(dir_last_moved == "Right"):
-				animationPlayer.play("Idle Right")
+				animationState.travel("Idle Right")
 			elif(dir_last_moved == "Left"):
-				animationPlayer.play("Idle Left")
+				animationState.travel("Idle Left")
 	if Input.is_action_just_pressed("attack") and !attacking:
 		attack()
+		#if(dir_last_moved == "Right"):
+		#		animationState.travel("Idle Right")
+		#elif(dir_last_moved == "Left"):
+		#	animationState.travel("Idle Left")
 
 func hit(dmg, x_kb, y_kb, dir):
 	velocity.x = 0
@@ -96,12 +102,11 @@ func hit(dmg, x_kb, y_kb, dir):
 
 func attack():
 	attacking = true
-	if(dir_last_moved == "Right"):
-		animationPlayer.play("swing_right")
-	elif(dir_last_moved == "Left"):
-		animationPlayer.play("swing_left")
-	yield(animationPlayer, "animation_finished")
+	animationState.travel("swing")
+
+func done_attacking():
 	attacking = false
+	
 
 func _on_SwordBox_area_entered(area):
 	if area.is_in_group("enemies"):
