@@ -6,6 +6,7 @@ extends KinematicBody2D
 # var b = "text"
 var velocity = Vector2()
 var jumping = false
+var knocked = false
 export var run_speed = 100
 export var jump_speed = -200#-175
 export var gravity = 600
@@ -22,6 +23,8 @@ var health
 var max_health
 #current weapon damage
 var strength
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -46,10 +49,13 @@ func get_input():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	get_input()
+	if !knocked:
+		get_input()
 	velocity.y += gravity * delta
 	if jumping and is_on_floor():
 		jumping = false
+	if knocked and is_on_floor():
+		knocked = false
 	velocity = move_and_slide(velocity, UP_DIRECTION)
 	if(velocity.x > 0):
 		animationState.travel("Run Right")
@@ -63,9 +69,19 @@ func _physics_process(delta):
 		#elif(dir_last_moved == "Left"):
 		#	animationState.travel("Idle Left")
 
-func hit(dmg, x_kb, y_kb):
+func hit(dmg, x_kb, y_kb, dir):
+	velocity.x = 0
 	print('Player was hit for ' + str(dmg) + ' damage!')
 	health -= dmg
-	var kb_vector = Vector2(x_kb, y_kb)
-	velocity = move_and_slide(kb_vector, UP_DIRECTION)
+	if dir == -1:
+		velocity.x -= (run_speed + x_kb)
+	else:
+		velocity.x += (run_speed + x_kb)
+	velocity.y += y_kb
+	knocked = true
+	velocity = move_and_slide(velocity, UP_DIRECTION)
+	$Hitbox/CollisionShape2D.disabled = true
+	yield(get_tree().create_timer(5.0), "timeout")
+	$Hitbox/CollisionShape2D.disabled = false
+
 	

@@ -20,8 +20,8 @@ func _ready():
 	health = 2
 	speed = 25
 	damage = 1
-	x_kb = 0
-	y_kb = 0
+	x_kb = 50
+	y_kb = 50
 
 func _physics_process(delta):
 	vel.x = 0

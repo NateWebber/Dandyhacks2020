@@ -15,10 +15,12 @@ onready var player = get_parent().get_node("Player")
 
 func hit_player():
 	print('I hit the player!')
-	if player.position.x < position.x:
-		player.hit(damage, -x_kb, y_kb)
+	var dir
+	if vel.x < 0:
+		dir = -1
 	else:
-		player.hit(damage, x_kb, y_kb)
+		dir = 1
+	player.hit(damage, x_kb, -y_kb, dir)
 	
 
 func hit():

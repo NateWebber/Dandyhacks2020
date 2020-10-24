@@ -3,11 +3,11 @@
 [ext_resource path="res://src/enemies/green_slime.gd" type="Script" id=1]
 [ext_resource path="res://assets/MiniWorldSprites/Characters/Monsters/Slime.png" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 4.15263
 height = 0.0
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 3.41599
 height = 0.0
 
@@ -24,9 +24,9 @@ position = Vector2( 0.0662155, 0.397299 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.132431, 0.19865 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.0556831, 0.612494 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
