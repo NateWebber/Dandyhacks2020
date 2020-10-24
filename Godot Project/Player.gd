@@ -7,6 +7,7 @@ extends KinematicBody2D
 var velocity = Vector2.ZERO
 var up_direction = Vector2(0, -1)
 var jumping = true
+var dir_last_moved = "Right"
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
@@ -33,12 +34,19 @@ func _process(delta):
 		velocity.y -= 200
 		jumping = true
 	
-	if(velocity.x == 0):
-		animationState.travel("Stand")
-	elif(velocity.x > 0):
+	if(velocity.x > 0):
 		animationState.travel("Run Right")
-	else:
+		dir_last_moved = "Right"
+	elif(velocity.x < 0):
 		animationState.travel("Run Left")
+		dir_last_moved = "Left"
+	else:
+		if(dir_last_moved == "Right"):
+			animationState.travel("Stand")
+		elif(dir_last_moved == "Left"):
+			animationState.travel("Stand Left")
+		
+		
 	
 	if(!is_on_floor()):
 		velocity.y += 7.5
