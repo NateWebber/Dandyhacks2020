@@ -35,9 +35,10 @@ func generate_terrain():
 	var generating_platforms = false
 	var current_platform_slice
 	var platform_height
+	var in_cave = false
+	var in_temple = false
 	
-	
-	for x in range(1, 100): # iterate over vertical slices
+	for x in range(1, 1000): # iterate over vertical slices
 		rng.randomize()
 		var reference_x = current_slice.reference_x # get the x value on the tilemap from which to copy this slice
 		if current_slice.leading_height_change: # if the slice requires a leading height change (such as slope up), execute it
@@ -63,6 +64,12 @@ func generate_terrain():
 		elif(current_slice == load("./terrainGen/ramp down outside.gd")):
 			if(current_height < 0): # decreasingly likely to get downwards ramps as generation moves lower
 				probability += (-2 * current_height)
+		elif(current_slice == load("./terrainGen/floor cave.gd")):
+			in_cave = true
+			
+		if(in_cave):
+			for y in range(0, 30):
+				$backgroundTileMap.set_cell(x, y, $backgroundTileMap.get_cell(-1, -1))
 		
 		var running_total = 0
 		# scan through the next possible slices for the ground
@@ -108,4 +115,4 @@ func generate_terrain():
 		
 		print()	
 			
-	$TileMap.update_bitmask_region(Vector2(0, 0), Vector2(100, 30))
+	$TileMap.update_bitmask_region(Vector2(-1, -1), Vector2(1000, 30))
