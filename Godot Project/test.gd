@@ -11,9 +11,11 @@ var rng = RandomNumberGenerator.new()
 var current_height = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	pass
+func fuck():
 	var current_slice = load("res://terrainGen/floor outside.gd")
 	
-	for x in range(0, 100):
+	for x in range(1, 100):
 		rng.randomize()
 		var reference_x = current_slice.reference_x # get the x value on the tilemap from which to copy this slice
 		if current_slice.leading_height_change: # if the slice requires a leading height change (such as slope up), execute it
