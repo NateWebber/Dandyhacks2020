@@ -25,6 +25,9 @@ var health
 var max_health
 #current weapon damage
 var strength
+#knockback power
+var player_x_kb = 200
+var player_y_kb = 200
 
 
 
@@ -93,7 +96,10 @@ func hit(dmg, x_kb, y_kb, dir):
 
 func attack():
 	attacking = true
-	animationPlayer.play("swing_right")
+	if(dir_last_moved == "Right"):
+		animationPlayer.play("swing_right")
+	elif(dir_last_moved == "Left"):
+		animationPlayer.play("swing_left")
 	yield(animationPlayer, "animation_finished")
 	attacking = false
 

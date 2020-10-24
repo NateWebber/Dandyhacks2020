@@ -7,6 +7,8 @@ var speed
 var x_kb
 var y_kb
 
+var knocked = false
+
 var vel = Vector2()
 var up_direction = Vector2(0, -1)
 var gravity = 600
@@ -24,11 +26,19 @@ func hit_player():
 	
 
 func hit():
+	vel.x = 0
 	print('I got hit!')
 	health -= player.strength
 	if health < 1:
 		die()
-	#else:
+	else:
+		knocked = true
+		if vel.x < 0:
+			vel.x += (speed + player.player_x_kb)
+		else:
+			vel.x -= (speed + player.player_x_kb)
+		vel.y += player.player_y_kb
+		vel = move_and_slide(vel, up_direction)
 		
 func die():
 	print('I died!')

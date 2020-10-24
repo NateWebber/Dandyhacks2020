@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/MiniWorldSprites/Characters/Monsters/Slime.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 4.15263
+radius = 3.53582
 height = 0.0
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -75,6 +75,7 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 6
+frame = 6
 
 [node name="Hurtbox" type="Area2D" parent="." groups=[
 "enemies",
