@@ -13,12 +13,13 @@ const PLATFORM_CHANCE = .05
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Engine.set_target_fps(Engine.get_iterations_per_second())
 	new_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if($Player.position.x > 160):
-		$Camera2D.position.x = $Player.position.x
+		$Camera2D.position.x = $Player.position.x#80 + (int($Player.position.x / 8) * 8)
 	else:
 		$Camera2D.position.x = 160
 	
@@ -79,8 +80,11 @@ func generate_terrain():
 			if(rng.randf() < PLATFORM_CHANCE):
 				generating_platforms = true
 				current_platform_slice = load("./terrainGen/floating platform left.gd")
-				platform_height = current_height + rng.randi_range(3, 5) + 12
+				platform_height = current_height + 15
 		elif(generating_platforms):
+			if(current_height + 2 == platform_height):
+				if(current_platform_slice != load("./terrainGen/floating platform left")):
+					current_platform_slice = load("./terrainGen/floating platform right")
 			var platform_reference_x = current_platform_slice.reference_x
 			$TileMap.set_cell(x, platform_height, $TileMap.get_cell(platform_reference_x, 0))
 			
