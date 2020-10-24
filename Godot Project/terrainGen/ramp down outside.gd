@@ -10,6 +10,7 @@ const weights = [20, 80]
 const reference_x = -33
 const delta_height = -1
 const leading_height_change = false
+const platform_start_chance = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

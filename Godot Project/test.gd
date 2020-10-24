@@ -25,9 +25,9 @@ func new_game():
 	generate_terrain()
 
 func generate_terrain():
-	var current_slice = load("res://terrainGen/floor outside.gd")
+	var current_slice = load("res://terrainGen/floor outside.gd") #first slice should always be ground
 	
-	for x in range(1, 100):
+	for x in range(1, 100): # iterate over vertical slices
 		rng.randomize()
 		var reference_x = current_slice.reference_x # get the x value on the tilemap from which to copy this slice
 		if current_slice.leading_height_change: # if the slice requires a leading height change (such as slope up), execute it
