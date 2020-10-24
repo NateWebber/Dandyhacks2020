@@ -19,14 +19,25 @@ config/name="DandyHacks Game"
 run/main_scene="res://test.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+PluginSettings="*res://addons/github-integration/scripts/PluginSettings.gd"
+IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
+RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
+UserData="*res://addons/github-integration/scripts/user_data.gd"
+
 [display]
 
 window/size/width=512
 window/size/height=256
-window/size/test_width=2048
-window/size/test_height=1024
+window/size/test_width=1280
+window/size/test_height=960
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "github-integration" )
 
 [rendering]
 

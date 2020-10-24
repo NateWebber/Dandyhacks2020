@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/MiniWorldSprites/Characters/Soldiers/Melee/SwordsmanTemplate.png" type="Texture" id=2]
@@ -7,29 +7,8 @@
 radius = 6.07013
 height = 0.0
 
-[sub_resource type="Animation" id=8]
-resource_name = "Run Left"
-length = 0.5
-loop = true
-step = 0.125
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.125, 0.25, 0.375 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 15, 16, 17, 18 ]
-}
-
 [sub_resource type="Animation" id=2]
-resource_name = "Run Right"
-length = 0.5
-loop = true
-step = 0.125
+resource_name = "New Anim"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -37,58 +16,16 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.125, 0.25, 0.375 ),
+"times": PoolRealArray( 0.5, 1, 1.5, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 10, 11, 12, 13 ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "Stand"
-length = 0.5
-loop = true
-step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 10, 11 ]
-}
+[sub_resource type="AnimationNodeStateMachine" id=3]
+graph_offset = Vector2( -1374, -112.66 )
 
-[sub_resource type="AnimationNodeAnimation" id=10]
-animation = "Run Left"
-
-[sub_resource type="AnimationNodeAnimation" id=16]
-animation = "Run Right"
-
-[sub_resource type="AnimationNodeAnimation" id=11]
-animation = "Stand"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=18]
-
-[sub_resource type="AnimationNodeStateMachine" id=5]
-"states/Run Left/node" = SubResource( 10 )
-"states/Run Left/position" = Vector2( 692, 241 )
-"states/Run Right/node" = SubResource( 16 )
-"states/Run Right/position" = Vector2( 1121, 241 )
-states/Stand/node = SubResource( 11 )
-states/Stand/position = Vector2( 894, 241 )
-transitions = [ "Stand", "Run Left", SubResource( 14 ), "Run Left", "Stand", SubResource( 15 ), "Stand", "Run Right", SubResource( 17 ), "Run Right", "Stand", SubResource( 18 ) ]
-start_node = "Stand"
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id=19]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=4]
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -103,11 +40,9 @@ hframes = 5
 frame = 11
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/Run Left" = SubResource( 8 )
-"anims/Run Right" = SubResource( 2 )
-anims/Stand = SubResource( 9 )
+"anims/New Anim" = SubResource( 2 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 5 )
+tree_root = SubResource( 3 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 19 )
+parameters/playback = SubResource( 4 )
