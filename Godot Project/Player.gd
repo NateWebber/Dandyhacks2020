@@ -8,7 +8,9 @@ var velocity = Vector2()
 var jumping = false
 export var run_speed = 100
 export var jump_speed = -100
-export var gravity = 1200
+export var gravity = 24000
+const UP_DIRECTION = Vector2(0, -1)
+var snapVector = Vector2(0, 8)
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
@@ -28,6 +30,7 @@ func get_input():
 	
 	if jump and is_on_floor():
 		jumping = true
+		snapVector = Vector2.ZERO
 		velocity.y = jump_speed
 	if right:
 		velocity.x += run_speed
@@ -40,7 +43,8 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	if jumping and is_on_floor():
 		jumping = false
-	velocity = move_and_slide(velocity, Vector2(0, -1))
+		snapVector = Vector2(0, 8)
+	velocity = move_and_slide(velocity, UP_DIRECTION)
 	if(velocity.x > 0):
 		animationState.travel("Run Right")
 		#dir_last_moved = "Right"
