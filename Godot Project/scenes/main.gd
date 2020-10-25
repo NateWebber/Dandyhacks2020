@@ -29,8 +29,7 @@ func new_game():
 	generate_terrain()
 
 func generate_terrain():
-	#var current_slice = load("res://terrainGen/floor outside.gd") #first slice should always be ground
-	var current_slice = load("res://terrainGen/water fuck.gd")
+	var current_slice = load("res://terrainGen/floor outside.gd") #first slice should always be ground
 	var current_height = 0
 	
 	var generating_platforms = false

@@ -7,7 +7,7 @@ extends Node
 
 #cavern with stalactite
 const biome = "cave"
-const next_tiles = ["cavern", "cavern 4"]
+const next_tiles = ["cavern", "cavern 4", "cavern close"]
 const weights = [85, 10, 5]
 const reference_x = -68
 const delta_height = 0
