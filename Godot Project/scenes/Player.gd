@@ -4,6 +4,8 @@ extends KinematicBody2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+var disabled = true
+
 var velocity = Vector2()
 var jumping = false
 var knocked = false
@@ -14,8 +16,11 @@ export var gravity = 600
 
 const UP_DIRECTION = Vector2(0, -1)
 
+onready var explosion = preload("res://scenes/explosion.tscn")
+
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
+
 
 onready var animationState = animationTree.get("parameters/playback")
 var dir_last_moved = "Right"
@@ -38,6 +43,8 @@ func _ready():
 	max_health = 12
 	health = 12
 	strength = 1
+	disabled = false
+	visible = true
 
 func get_input():
 	velocity.x = 0
@@ -85,17 +92,22 @@ func _physics_process(delta):
 func hit(dmg, x_kb, y_kb, dir):
 	velocity.x = 0
 	print('Player was hit for ' + str(dmg) + ' damage!')
+	print('Current health: ' + str(health))
 	health -= dmg
-	if dir == -1:
-		velocity.x -= (run_speed + x_kb)
+	if health == 0 :
+		die()
 	else:
-		velocity.x += (run_speed + x_kb)
-	velocity.y += y_kb
-	knocked = true
-	velocity = move_and_slide(velocity, UP_DIRECTION)
-	$Hitbox/CollisionShape2D.disabled = true
-	yield(get_tree().create_timer(5.0), "timeout")
-	$Hitbox/CollisionShape2D.disabled = false
+		if dir == -1:
+			velocity.x -= (run_speed + x_kb)
+		else:
+			velocity.x += (run_speed + x_kb)
+		velocity.y += y_kb
+		knocked = true
+		velocity = move_and_slide(velocity, UP_DIRECTION)
+		$Hitbox/CollisionShape2D.disabled = true
+		yield(get_tree().create_timer(5.0), "timeout")
+		$Hitbox/CollisionShape2D.disabled = false
+
 
 	
 
@@ -106,7 +118,17 @@ func attack():
 func done_attacking():
 	attacking = false
 	
-
+func die():
+	print("fuck")
+	disabled = true
+	visible = false
+	var boom = explosion.instance()
+	boom.position = self.position
+	get_parent().add_child(boom)
+	yield(get_tree().create_timer(2.0), "timeout")
+	get_parent().get_node("transition/SceneTransitionRect").transition_to("res://scenes/menus/menu.tscn")
+	
+	
 func _on_SwordBox_area_entered(area):
 	if area.is_in_group("enemies"):
 		area.get_parent().hit()

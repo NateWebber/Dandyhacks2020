@@ -5,7 +5,7 @@
 [ext_resource path="res://src/enemies/green_slime.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/main.gd" type="Script" id=4]
 [ext_resource path="res://assets/backgrounds/Dawn.png" type="Texture" id=5]
-[ext_resource path="res://scenes/Transition.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/menus/Transition.tscn" type="PackedScene" id=6]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 4 )
@@ -43,4 +43,3 @@ position = Vector2( 99.4091, 130.931 )
 [node name="transition" type="CanvasLayer" parent="."]
 
 [node name="SceneTransitionRect" parent="transition" instance=ExtResource( 6 )]
-visible = false

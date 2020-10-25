@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="DandyHacks Game"
-run/main_scene="res://scenes/Menu.tscn"
+run/main_scene="res://scenes/menus/Menu.tscn"
 config/icon="res://icon.png"
 
 [display]

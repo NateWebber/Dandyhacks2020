@@ -13,14 +13,12 @@ var velocity
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Area2D/CollisionShape2D.disabled = true
-	$Area2D/CollisionShape2D.disabled = true
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	velocity = Vector2(rng.randi_range(-50, 50), rng.randi_range(-100, -300))
 	$AnimationPlayer.play("coin")
 	connect("collected", get_parent(), "coin_collected")
-	yield (get_tree().create_timer(1.0), "timeout")
-	$Area2D/CollisionShape2D.disabled = false
+	yield (get_tree().create_timer(0.75), "timeout")
 	$Area2D/CollisionShape2D.disabled = false
 	
 
