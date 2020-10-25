@@ -34,6 +34,7 @@ func hit_player():
 	
 
 func hit():
+	get_parent().find_node("EnemyHurtSound").play()
 	vel.x = 0
 	var weighted_kb_x = player.player_x_kb / weight
 	var weighted_kb_y = player.player_y_kb / weight

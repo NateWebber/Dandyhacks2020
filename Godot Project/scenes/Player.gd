@@ -55,6 +55,7 @@ func get_input():
 	if jump and is_on_floor():
 		jumping = true
 		velocity.y = jump_speed
+		get_parent().find_node("Jump").play()
 	if right:
 		velocity.x += run_speed
 	if left:
@@ -65,12 +66,15 @@ func _physics_process(delta):
 	if !knocked:
 		get_input()
 	velocity.y += gravity * delta
+	if jumping:
+		attacking = false	
 	if jumping and is_on_floor():
 		jumping = false
 	if knocked and is_on_floor():
 		knocked = false
 	velocity = move_and_slide(velocity, UP_DIRECTION)
 	if !attacking:
+		get_parent().find_node("AxeSwingSound").stop()
 		if(velocity.x > 0):
 			animationState.travel("Run Right")
 			dir_last_moved = "Right"
@@ -91,6 +95,9 @@ func _physics_process(delta):
 
 func hit(dmg, x_kb, y_kb, dir):
 	attacking = false
+
+	get_parent().find_node("PlayerHurtSound").play()
+
 	velocity.x = 0
 	print('Player was hit for ' + str(dmg) + ' damage!')
 	print('Current health: ' + str(health))
@@ -114,6 +121,7 @@ func hit(dmg, x_kb, y_kb, dir):
 	
 
 func attack():
+	get_parent().find_node("AxeSwingSound").play()
 	attacking = true
 	animationState.travel("swing")
 
