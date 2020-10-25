@@ -46,7 +46,7 @@ func generate_terrain():
 	var previous_slice = current_slice
 	var identical_slice_count = 1	
 	
-	for x in range(1, 500): # iterate over vertical slices
+	for x in range(1, 1000): # iterate over vertical slices
 		rng.randomize()
 		
 		var probability = rng.randi_range(0, 100)
@@ -158,16 +158,15 @@ func generate_terrain():
 					current_platform_slice = load(loadString)
 					break
 					
-		if(current_slice.spawns_enabled == true):
+		if(current_slice.spawns_enabled == true && x > 10):
 			print("SPAWNS ENABLED")
 			var selected = rand_range(0, len(current_slice.spawns_list) - 1)
 			
 			var load_string = "res://src/enemies/" + current_slice.spawns_list[selected] + ".tscn"
 			
-			
-			if(rng.randf() < 0.1):
+			if(rng.randf() < 0.1):#0.075):
 				var new_instance = load(load_string).instance()
-				new_instance.position.y = (current_height + 17) * 8
+				new_instance.position.y = (current_height + 16) * 8
 				new_instance.position.x = x * 8
 				add_child(new_instance)
 		else:
