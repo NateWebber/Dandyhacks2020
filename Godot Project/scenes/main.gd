@@ -9,6 +9,7 @@ extends Node2D
 var rng = RandomNumberGenerator.new()
 const PLATFORM_CHANCE = 0.05
 
+onready var coin = preload("res://src/items/coin.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -156,3 +157,18 @@ func generate_terrain():
 
 			
 	$TileMap.update_bitmask_region(Vector2(-1, -1), Vector2(1000, 30))
+
+func on_enemy_died(enemy, value):
+	print("Signal received!")
+	var enemy_pos = enemy.position
+	for i in range(value):
+		spawn_coin(enemy_pos)
+
+func spawn_coin(pos):
+	print("Coin spawned!")
+	var new_coin = coin.instance()
+	new_coin.position = pos
+	self.add_child(new_coin)
+	
+func coin_collected():
+	print("Coin collected!")

@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name Enemy
 
+signal died(enemy, value)
+
 var health
 var damage
 var speed
@@ -17,6 +19,9 @@ var gravity = 600
 
 onready var player = get_parent().get_node("Player")
 onready var explosion = preload("res://scenes/explosion.tscn")
+
+func _ready():
+	connect("died", get_parent(), "on_enemy_died")
 
 func hit_player():
 	print('I hit the player!')
@@ -56,11 +61,13 @@ func die():
 	var boom = explosion.instance()
 	boom.position = self.position
 	get_parent().add_child(boom)
-	print(get_parent())
-	print(get_parent().get_parent())
-	var instanced_coin = load("res://coin.tscn").instance()
-	instanced_coin.position = position
+	emit_signal("died", self, coin_value)
+	
+	#print(get_parent())
+	#print(get_parent().get_parent())
+	#var instanced_coin = load("res://coin.tscn").instance()
+	#instanced_coin.position = position
 	#instanced_coin.connect("collected", get_parent(), "_on_coin_collected")
-	self.get_parent().add_child(instanced_coin)
+	#self.get_parent().add_child(instanced_coin)
 
 	queue_free()

@@ -6,17 +6,22 @@ extends KinematicBody2D
 # var b = "text"
 export var gravity = 600
 onready var player = get_parent().get_node("Player")
+
 signal collected()
 
 var velocity
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Area2D/CollisionShape2D.disabled = true
+	$Area2D/CollisionShape2D.disabled = true
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	#velocity = Vector2(rng.randi_range(-50, 50), rng.randi_range(-100, -300))
-	velocity = Vector2(100, -200)
+	velocity = Vector2(rng.randi_range(-50, 50), rng.randi_range(-100, -300))
 	$AnimationPlayer.play("coin")
-	connect("collected", get_parent(), "_on_coin_collected")
+	connect("collected", get_parent(), "coin_collected")
+	yield (get_tree().create_timer(1.0), "timeout")
+	$Area2D/CollisionShape2D.disabled = false
+	$Area2D/CollisionShape2D.disabled = false
 	
 
 
@@ -32,4 +37,4 @@ func _process(delta):
 func _on_Area2D_area_entered(area):
 	if(player == area.get_parent()):
 		emit_signal("collected")
-		#queue_free()
+		queue_free()
