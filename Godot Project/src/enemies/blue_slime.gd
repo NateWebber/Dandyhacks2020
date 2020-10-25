@@ -3,7 +3,7 @@ extends Enemy
 #animation stuff
 onready var animationPlayer = get_node("AnimationPlayer")
 #delay before running at the player
-var react_time = 500
+var react_time = 250
 
 #direction handling
 var dir = 0
@@ -19,18 +19,18 @@ func set_dir(target_dir):
 		next_dir_time = OS.get_ticks_msec() + react_time
 
 func _ready():
-	health = 2
-	speed = 25
-	damage = 1
-	x_kb = 40
-	y_kb = 40
-	weight = 1
-	coin_value = 1
+	health = 4
+	speed = 35
+	damage = 2
+	x_kb = 70
+	y_kb = 70
+	weight = 1.5
+	coin_value = 4
 
 func _physics_process(delta):
 	if !knocked:
 		vel.x = 0
-		if(abs(get_parent().find_node("Player").position.x - position.x) < 64):
+		if(abs(get_parent().find_node("Player").position.x - position.x) < 128):
 			if player.position.x < position.x - offset:
 				set_dir(-1)
 			elif player.position.x > position.x +  offset:

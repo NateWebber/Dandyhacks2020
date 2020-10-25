@@ -10,7 +10,7 @@ var velocity = Vector2()
 var jumping = false
 var knocked = false
 var attacking = false
-export var run_speed = 75
+export var run_speed = 60
 export var jump_speed = -200
 export var gravity = 600
 
