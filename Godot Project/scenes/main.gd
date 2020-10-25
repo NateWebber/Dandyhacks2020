@@ -160,14 +160,15 @@ func generate_terrain():
 					
 		if(current_slice.spawns_enabled == true && x > 10):
 			print("SPAWNS ENABLED")
-			var selected = rand_range(0, len(current_slice.spawns_list) - 1)
-			
+			var selected =  round(rand_range(0, len(current_slice.spawns_list) - 1))
+			print(selected)
+
 			var load_string = "res://src/enemies/" + current_slice.spawns_list[selected] + ".tscn"
 			
-			if(rng.randf() < 0.1):#0.075):
+			if(rng.randf() < 0.08):
 				var new_instance = load(load_string).instance()
 				new_instance.position.y = (current_height + 16) * 8
-				new_instance.position.x = x * 8
+				new_instance.position.x = (x * 8) + 4
 				add_child(new_instance)
 		else:
 			print("No spawns at x " + str(x))

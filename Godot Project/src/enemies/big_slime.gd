@@ -24,7 +24,7 @@ func _ready():
 	damage = 4
 	x_kb = 100
 	y_kb = 100
-	weight = 3
+	weight = 5
 	coin_value = 15
 
 func _physics_process(delta):
