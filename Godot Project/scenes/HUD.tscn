@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/hud/healthbar.png" type="Texture" id=1]
 [ext_resource path="res://scenes/HUD.gd" type="Script" id=2]
 [ext_resource path="res://assets/GoldCoinSpinning.png" type="Texture" id=3]
+[ext_resource path="res://assets/fonts/Bradley Gratis.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "coin"
@@ -21,6 +22,10 @@ tracks/0/keys = {
 "values": [ 0, 23 ]
 }
 
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 4 )
+
 [node name="HUD" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -36,11 +41,22 @@ vframes = 13
 frame = 12
 
 [node name="coin" type="Sprite" parent="."]
-position = Vector2( 250.569, 14.1593 )
-scale = Vector2( 2, 2 )
+position = Vector2( 250.235, 16.829 )
+scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 3 )
 hframes = 24
 frame = 23
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/coin = SubResource( 1 )
+
+[node name="coin_count" type="Label" parent="."]
+margin_left = 264.632
+margin_right = 304.632
+margin_bottom = 63.0
+custom_fonts/font = SubResource( 2 )
+text = "x 0
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}

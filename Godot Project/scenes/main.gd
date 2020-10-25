@@ -10,6 +10,7 @@ var rng = RandomNumberGenerator.new()
 const PLATFORM_CHANCE = 0.05
 
 onready var coin = preload("res://src/items/coin.tscn")
+var score = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,6 +33,8 @@ func _process(delta):
 
 func new_game():
 	generate_terrain()
+	score = 0
+	$hud_canvas/HUD.update_hud($Player.health, score)
 
 func generate_terrain():
 	var current_slice = load("res://terrainGen/floor outside.gd") #first slice should always be ground
@@ -190,3 +193,6 @@ func spawn_coin(pos):
 func coin_collected():
 	print("Coin collected!")
 	$CoinSound.play()
+	score += 1
+	$hud_canvas/HUD.update_hud($Player.health, score)
+	

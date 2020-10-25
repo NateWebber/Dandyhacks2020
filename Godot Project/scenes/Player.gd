@@ -108,7 +108,7 @@ func hit(dmg, x_kb, y_kb, dir):
 	if health < 0:
 		health = 0
 		
-	get_parent().get_node("hud_canvas/HUD").update_hud(health)
+	get_parent().get_node("hud_canvas/HUD").update_hud(health, get_parent().score)
 	if health == 0 :
 		die()
 	else:
@@ -141,6 +141,7 @@ func die():
 	var boom = explosion.instance()
 	boom.position = self.position
 	get_parent().add_child(boom)
+	get_parent().get_node("bgm").stop()
 	yield(get_tree().create_timer(2.0), "timeout")
 	get_parent().get_node("hud_canvas/SceneTransitionRect").transition_to("res://scenes/menus/gameover.tscn")
 	
