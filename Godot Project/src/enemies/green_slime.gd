@@ -20,12 +20,12 @@ func set_dir(target_dir):
 
 func _ready():
 	health = 2
-
 	speed = 25
 	damage = 1
 	x_kb = 50
 	y_kb = 50
 	weight = 1
+	coin_value = 1
 
 func _physics_process(delta):
 	if !knocked:
