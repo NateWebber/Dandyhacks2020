@@ -5,9 +5,11 @@ extends Node
 # var a = 2
 # var b = "text"
 
-const next_tiles = ["water", "water drain", "floor cave"]
-const weights = [50, 10, 40]
-const reference_x = -52
+#cavern with stalactite
+const biome = "cave"
+const next_tiles = ["cavern", "cavern 4"]
+const weights = [85, 10, 5]
+const reference_x = -68
 const delta_height = 0
 const leading_height_change = true
 const platform_startable = false

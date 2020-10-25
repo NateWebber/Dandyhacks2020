@@ -5,6 +5,7 @@ extends Node
 # var a = 2
 # var b = "text"
 
+const biome = "cave"
 const next_tiles = ["floor cave"]
 const weights = [100]
 const reference_x = -50
