@@ -98,8 +98,12 @@ func hit(dmg, x_kb, y_kb, dir):
 	get_parent().find_node("PlayerHurtSound").play()
 	velocity.x = 0
 	print('Player was hit for ' + str(dmg) + ' damage!')
-	print('Current health: ' + str(health))
 	health -= dmg
+	print('Current health: ' + str(health))
+	
+	if health < 0:
+		health = 0
+		
 	get_parent().get_node("hud_canvas/HUD").update_hud(health)
 	if health == 0 :
 		die()

@@ -30,20 +30,22 @@ func _ready():
 func _physics_process(delta):
 	if !knocked:
 		vel.x = 0
-		if player.position.x < position.x - offset:
-			set_dir(-1)
-		elif player.position.x > position.x +  offset:
-			set_dir(1)
-		else:
-			set_dir(0)
-			
-		if OS.get_ticks_msec() > next_dir_time:
-			dir = next_dir
-			
-		if dir == 1:
-			vel.x += speed
-		if dir == -1:
-			vel.x -= speed
+		if(abs(get_parent().find_node("Player").position.x - position.x) < 64):
+			if player.position.x < position.x - offset:
+				set_dir(-1)
+			elif player.position.x > position.x +  offset:
+				set_dir(1)
+			else:
+				set_dir(0)
+				
+			if OS.get_ticks_msec() > next_dir_time:
+				dir = next_dir
+				
+			if dir == 1:
+				vel.x += speed
+			if dir == -1:
+				vel.x -= speed
+		
 			
 	#gravity i guess
 	vel.y += gravity * delta

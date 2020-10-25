@@ -18,6 +18,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	$DeathShape.position.x = $Player.position.x
 	if($Player.position.x > 160):
 		$Sprite.position.x = $Player.position.x
 		$Camera2D.position.x = $Player.position.x

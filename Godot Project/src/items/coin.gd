@@ -18,7 +18,7 @@ func _ready():
 	velocity = Vector2(rng.randi_range(-50, 50), rng.randi_range(-100, -300))
 	$AnimationPlayer.play("coin")
 	connect("collected", get_parent(), "coin_collected")
-	yield (get_tree().create_timer(0.75), "timeout")
+	yield (get_tree().create_timer(0.25), "timeout")
 	$Area2D/CollisionShape2D.disabled = false
 	
 
@@ -28,9 +28,6 @@ func _process(delta):
 	velocity.y += gravity * delta
 	velocity.x /= 2
 	velocity = move_and_slide(velocity, Vector2.UP)
-	
-
-
 
 func _on_Area2D_area_entered(area):
 	if(player == area.get_parent()):
