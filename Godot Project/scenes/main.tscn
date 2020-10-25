@@ -14,6 +14,9 @@ script = ExtResource( 4 )
 position = Vector2( 300, 119.407 )
 scale = Vector2( 10, 0.5 )
 texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="backgroundTileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -35,7 +38,7 @@ position = Vector2( 160, 120 )
 current = true
 
 [node name="green_slime" parent="." instance=ExtResource( 3 )]
-position = Vector2( 118.491, 112.691 )
+position = Vector2( 99.4091, 130.931 )
 
 [node name="transition" type="CanvasLayer" parent="."]
 

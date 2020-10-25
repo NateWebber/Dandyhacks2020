@@ -4,6 +4,8 @@ class_name Enemy
 var health
 var damage
 var speed
+var coin_value
+var weight
 var x_kb
 var y_kb
 
@@ -27,17 +29,23 @@ func hit_player():
 
 func hit():
 	vel.x = 0
+	#weighted_kb_x 
 	print('I got hit!')
 	health -= player.strength
 	if health < 1:
 		die()
 	else:
 		knocked = true
-		if vel.x < 0:
+		if player.position.x < position.x:
+			print('I should be hit to the right!')
 			vel.x += (speed + player.player_x_kb)
+			
 		else:
+			print('I should be hit to the left!')
 			vel.x -= (speed + player.player_x_kb)
-		vel.y += player.player_y_kb
+			
+		vel.y -= player.player_y_kb
+		
 		vel = move_and_slide(vel, up_direction)
 		
 func die():

@@ -27,8 +27,8 @@ var max_health
 #current weapon damage
 var strength
 #knockback power
-var player_x_kb = 200
-var player_y_kb = 200
+var player_x_kb = 70
+var player_y_kb = 70
 
 
 

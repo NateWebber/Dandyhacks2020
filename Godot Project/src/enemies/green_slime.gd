@@ -19,7 +19,7 @@ func set_dir(target_dir):
 		next_dir_time = OS.get_ticks_msec() + react_time
 
 func _ready():
-	health = 10
+	health = 100
 	speed = 25
 	damage = 1
 	x_kb = 50

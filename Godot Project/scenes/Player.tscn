@@ -1,7 +1,16 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/MiniWorldSprites/Characters/Soldiers/Melee/RedMelee/AxemanRed.png" type="Texture" id=2]
+[ext_resource path="res://assets/slash_fx/AxeSlashEffect (9).png" type="Texture" id=3]
+[ext_resource path="res://assets/slash_fx/AxeSlashEffect (6).png" type="Texture" id=4]
+[ext_resource path="res://assets/slash_fx/AxeSlashEffect (7).png" type="Texture" id=5]
+[ext_resource path="res://assets/slash_fx/AxeSlashEffect (8).png" type="Texture" id=6]
+[ext_resource path="res://assets/slash_fx/AxeSlashEffect (4).png" type="Texture" id=7]
+[ext_resource path="res://assets/slash_fx/AxeSlashEffect (1).png" type="Texture" id=8]
+[ext_resource path="res://assets/slash_fx/AxeSlashEffect (5).png" type="Texture" id=9]
+[ext_resource path="res://assets/slash_fx/AxeSlashEffect (2).png" type="Texture" id=10]
+[ext_resource path="res://assets/slash_fx/AxeSlashEffect (3).png" type="Texture" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.44136
@@ -361,6 +370,30 @@ tracks/3/keys = {
 "method": "done_attacking"
 } ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("slash_fx_2:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("slash_fx_1:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [sub_resource type="AnimationNodeAnimation" id=14]
 animation = "Idle Left"
@@ -421,6 +454,14 @@ height = 4.15745
 [sub_resource type="RectangleShape2D" id=32]
 extents = Vector2( 8.78952, 9.92505 )
 
+[sub_resource type="SpriteFrames" id=33]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -433,7 +474,7 @@ position = Vector2( 0, -0.0371628 )
 texture = ExtResource( 2 )
 vframes = 6
 hframes = 6
-frame = 35
+frame = 23
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 "anims/Idle Left" = SubResource( 2 )
@@ -467,7 +508,20 @@ shape = SubResource( 31 )
 position = Vector2( 1.52412, 0.105112 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordBox"]
-position = Vector2( -2, -0.1 )
+position = Vector2( -10.9317, -0.105112 )
 shape = SubResource( 32 )
 disabled = true
+
+[node name="slash_fx_1" type="AnimatedSprite" parent="."]
+position = Vector2( -9.42329, 1.51907 )
+scale = Vector2( 0.231904, 0.230454 )
+frames = SubResource( 33 )
+frame = 8
+flip_h = true
+
+[node name="slash_fx_2" type="AnimatedSprite" parent="."]
+position = Vector2( 13.8579, 0.128361 )
+scale = Vector2( 0.231904, 0.230454 )
+frames = SubResource( 33 )
+frame = 5
 [connection signal="area_entered" from="SwordBox" to="." method="_on_SwordBox_area_entered"]
