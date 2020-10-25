@@ -94,6 +94,7 @@ func hit(dmg, x_kb, y_kb, dir):
 	print('Player was hit for ' + str(dmg) + ' damage!')
 	print('Current health: ' + str(health))
 	health -= dmg
+	get_parent().get_node("hud_canvas/HUD").update_hud(health)
 	if health == 0 :
 		die()
 	else:
@@ -119,14 +120,14 @@ func done_attacking():
 	attacking = false
 	
 func die():
-	print("fuck")
+	print("Player died!")
 	disabled = true
 	visible = false
 	var boom = explosion.instance()
 	boom.position = self.position
 	get_parent().add_child(boom)
 	yield(get_tree().create_timer(2.0), "timeout")
-	get_parent().get_node("transition/SceneTransitionRect").transition_to("res://scenes/menus/menu.tscn")
+	get_parent().get_node("hud_canvas/SceneTransitionRect").transition_to("res://scenes/menus/menu.tscn")
 	
 	
 func _on_SwordBox_area_entered(area):

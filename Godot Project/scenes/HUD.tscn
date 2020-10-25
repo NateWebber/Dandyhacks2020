@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/hud/healthbar.png" type="Texture" id=1]
+[ext_resource path="res://scenes/HUD.gd" type="Script" id=2]
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" type="Sprite" parent="."]
+position = Vector2( 33.454, 16.0558 )
+texture = ExtResource( 1 )
+vframes = 13
+frame = 12

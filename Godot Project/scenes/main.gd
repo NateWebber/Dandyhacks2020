@@ -21,9 +21,11 @@ func _process(delta):
 	if($Player.position.x > 160):
 		$Sprite.position.x = $Player.position.x
 		$Camera2D.position.x = $Player.position.x
+		
 	else:
 		$Sprite.position.x = $Player.position.x
 		$Camera2D.position.x = 160
+		
 	
 
 func new_game():
