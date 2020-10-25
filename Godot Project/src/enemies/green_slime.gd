@@ -20,6 +20,7 @@ func set_dir(target_dir):
 
 func _ready():
 	health = 2
+
 	speed = 25
 	damage = 1
 	x_kb = 50
@@ -65,3 +66,4 @@ func _physics_process(delta):
 func _on_Hurtbox_area_entered(area):
 	if area.get_parent() == player and area.name == "Hitbox":
 		hit_player()
+

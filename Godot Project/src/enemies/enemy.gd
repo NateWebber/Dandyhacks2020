@@ -56,4 +56,11 @@ func die():
 	var boom = explosion.instance()
 	boom.position = self.position
 	get_parent().add_child(boom)
+	print(get_parent())
+	print(get_parent().get_parent())
+	var instanced_coin = load("res://coin.tscn").instance()
+	instanced_coin.position = position
+	#instanced_coin.connect("collected", get_parent(), "_on_coin_collected")
+	self.get_parent().add_child(instanced_coin)
+
 	queue_free()
