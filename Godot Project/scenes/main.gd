@@ -188,3 +188,4 @@ func spawn_coin(pos):
 	
 func coin_collected():
 	print("Coin collected!")
+	$CoinSound.play()
