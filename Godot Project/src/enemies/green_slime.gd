@@ -19,11 +19,12 @@ func set_dir(target_dir):
 		next_dir_time = OS.get_ticks_msec() + react_time
 
 func _ready():
-	health = 100
+	health = 2
 	speed = 25
 	damage = 1
 	x_kb = 50
 	y_kb = 50
+	weight = 1
 
 func _physics_process(delta):
 	if !knocked:
