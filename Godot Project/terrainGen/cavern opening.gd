@@ -5,14 +5,13 @@ extends Node
 # var a = 2
 # var b = "text"
 
-const biome = "outside"
-const next_tiles = ["floating platform", "floating platform right"]
-const weights = [75, 25]
-const reference_x = -37
+const biome = "cave"
+const next_tiles = ["cavern opening 2"]
+const weights = [100]
+const reference_x = -64
 const delta_height = 0
-const leading_height_change = false
-const platform_starplatform_startablet_chance = false
-
+const leading_height_change = true
+const platform_startable = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

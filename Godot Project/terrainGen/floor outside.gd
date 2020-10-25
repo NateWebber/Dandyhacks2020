@@ -5,8 +5,9 @@ extends Node
 # var a = 2
 # var b = "text"
 
-const next_tiles = ["ramp up outside", "floor outside", "floor cave", "ramp down outside"]
-const weights = [13, 74, 1, 12]
+const biome = "outside"
+const next_tiles = ["ramp up outside", "floor outside", "floor outside 2", "floor cave", "ramp down outside"]
+const weights = [12, 37, 37, 2, 12]
 const reference_x = -32
 const delta_height = 0
 const leading_height_change = false

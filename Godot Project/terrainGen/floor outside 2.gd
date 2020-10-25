@@ -6,16 +6,16 @@ extends Node
 # var b = "text"
 
 const biome = "outside"
-const next_tiles = ["floating platform", "floating platform right"]
-const weights = [75, 25]
-const reference_x = -37
+const next_tiles = ["ramp up outside", "floor outside", "ramp down outside"]
+const weights = [13, 75, 12]
+const reference_x = -33
 const delta_height = 0
 const leading_height_change = false
-const platform_starplatform_startablet_chance = false
+const platform_startable = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

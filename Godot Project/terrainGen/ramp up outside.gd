@@ -5,9 +5,10 @@ extends Node
 # var a = 2
 # var b = "text"
 
+const biome = "outside"
 const next_tiles = ["ramp up outside", "floor outside"]
-const weights = [20, 80]
-const reference_x = -34
+const weights = [5, 95]
+const reference_x = -35
 const delta_height = 1
 const leading_height_change = true
 const platform_startable = true
