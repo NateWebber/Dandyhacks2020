@@ -13,6 +13,9 @@ const delta_height = 1
 const leading_height_change = true
 const platform_startable = true
 
+const spawns_enabled = false
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
