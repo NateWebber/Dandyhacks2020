@@ -45,6 +45,8 @@ func _ready():
 	strength = 1
 	disabled = false
 	visible = true
+	attacking=false
+	knocked=false
 
 func get_input():
 	velocity.x = 0
@@ -140,7 +142,7 @@ func die():
 	boom.position = self.position
 	get_parent().add_child(boom)
 	yield(get_tree().create_timer(2.0), "timeout")
-	get_parent().get_node("hud_canvas/SceneTransitionRect").transition_to("res://scenes/menus/menu.tscn")
+	get_parent().get_node("hud_canvas/SceneTransitionRect").transition_to("res://scenes/menus/gameover.tscn")
 	
 	
 func _on_SwordBox_area_entered(area):

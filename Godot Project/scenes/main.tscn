@@ -58,19 +58,23 @@ position = Vector2( 99.4091, 130.931 )
 
 [node name="PlayerHurtSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+volume_db = -18.0
 
 [node name="EnemyHurtSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+volume_db = -18.0
 
 [node name="AxeSwingSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
-volume_db = -5.0
+volume_db = -18.0
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
+volume_db = -18.0
 
 [node name="Jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
+volume_db = -18.0
 
 [node name="DeathShape" type="Area2D" parent="."]
 position = Vector2( 0, 250 )

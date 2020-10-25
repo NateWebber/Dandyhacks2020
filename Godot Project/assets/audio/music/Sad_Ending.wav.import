@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Sad_Ending.wav-663f5a20ce705dc5fb6df25b440c5696.sample"
+
+[deps]
+
+source_file="res://assets/audio/music/Sad_Ending.wav"
+dest_files=[ "res://.import/Sad_Ending.wav-663f5a20ce705dc5fb6df25b440c5696.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
