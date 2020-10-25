@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/menus/Menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menus/Transition.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/menu_graphics/new_game.png" type="Texture" id=7]
 [ext_resource path="res://assets/menu_graphics/bricks.png" type="Texture" id=8]
 [ext_resource path="res://assets/menu_graphics/hero.png" type="Texture" id=9]
+[ext_resource path="res://assets/audio/music/8_Bit_Menu.wav" type="AudioStream" id=10]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -81,5 +82,9 @@ margin_left = -0.28125
 margin_top = 0.25
 margin_right = -0.28125
 margin_bottom = 0.25
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -18.0
 [connection signal="pressed" from="New Game" to="." method="_on_New_Game_pressed"]
 [connection signal="pressed" from="HOF" to="." method="_on_HOF_pressed"]
