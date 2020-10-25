@@ -14,6 +14,7 @@ onready var coin = preload("res://src/items/coin.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Engine.set_target_fps(Engine.get_iterations_per_second())
+	$bgm.play()
 	new_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

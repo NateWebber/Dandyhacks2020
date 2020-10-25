@@ -14,7 +14,7 @@ const leading_height_change = false
 const platform_startable = true
 
 const spawns_enabled = true
-const spawns_list = ["green_slime"]
+const spawns_list = ["green_slime", "blue_slime", "blue_slime"]
 
 
 
