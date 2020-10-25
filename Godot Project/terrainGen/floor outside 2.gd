@@ -13,6 +13,11 @@ const delta_height = 0
 const leading_height_change = false
 const platform_startable = true
 
+const spawns_enabled = true
+const spawns_list = ["green_slime"]
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass

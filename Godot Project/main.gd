@@ -45,8 +45,9 @@ func generate_terrain():
 	var previous_biome = "outside"
 	var previous_slice = current_slice
 	var identical_slice_count = 1	
-	
+	print(previous_biome)
 	for x in range(1, 150): # iterate over vertical slices
+		print(x)
 		rng.randomize()
 		
 		var probability = rng.randi_range(0, 100)
@@ -93,6 +94,8 @@ func generate_terrain():
 			identical_slice_count += 1
 		else:
 			identical_slice_count = 1
+			
+		print("CHECKING BIOME CHANGE")
 		# check if we changed biomes, increment count, update accordingly
 		if(current_slice.biome != previous_biome):
 			print("BIOME CHANGE TO " + current_slice.biome)
@@ -108,7 +111,7 @@ func generate_terrain():
 		
 		for y in range(-30, 45): # iterate over all tiles in the slice, copying from the reference position to where we are on the map
 			$TileMap.set_cell(x, y + current_height, $TileMap.get_cell(reference_x, y))
-		
+		print("tiles set")
 		if !current_slice.leading_height_change: # no leading height change so height should be changed now
 			current_height -= current_slice.delta_height
 		
@@ -116,6 +119,16 @@ func generate_terrain():
 			for y in range(0, 30):
 				$backgroundTileMap.set_cell(x, y, $backgroundTileMap.get_cell(-1, -1))
 		
+		print("HM...")
+		if(current_slice.spawns_enabled == true):
+			print("SPAWNS ENABLED")
+			var selected = rand_range(0, len(current_slice.spawns_list) - 1)
+			var load_string = "res://src/enemies/" + current_slice.spawns_list[selected] + ".gd"
+			add_child(load(load_string).instance())
+		else:
+			print("No spawns at x " + str(x))
+			
+
 		previous_biome = current_slice.biome
 		previous_slice = current_slice
 		var running_total = 0
@@ -128,9 +141,7 @@ func generate_terrain():
 					scan_index = len(current_slice.next_tiles) - 1
 				var loadString = "res://terrainGen/" + current_slice.next_tiles[scan_index] + ".gd" 
 				current_slice = load(loadString)
-				break
-		
-		
+				break		
 		
 		if(!generating_platforms && current_slice.platform_startable):
 			if(rng.randf() < PLATFORM_CHANCE):
@@ -154,9 +165,10 @@ func generate_terrain():
 					if(current_platform_slice.next_tiles[scan_index] == "END"):
 						generating_platforms = false
 						break
-					var loadString = "res://terrainGen/" + current_platform_slice.next_tiles[scan_index] + ".gd" 
-					current_platform_slice = load(loadString)
-					break
+					else:
+						var loadString = "res://terrainGen/" + current_platform_slice.next_tiles[scan_index] + ".gd" 
+						current_platform_slice = load(loadString)
+						break
 
 			
 	$TileMap.update_bitmask_region(Vector2(-1, -1), Vector2(1000, 30))
