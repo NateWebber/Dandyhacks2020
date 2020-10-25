@@ -1,6 +1,6 @@
 [gd_scene load_steps=35 format=2]
 
-[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/MiniWorldSprites/Characters/Soldiers/Melee/RedMelee/AxemanRed.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
