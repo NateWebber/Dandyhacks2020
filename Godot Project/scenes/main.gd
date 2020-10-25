@@ -154,8 +154,22 @@ func generate_terrain():
 					var loadString = "res://terrainGen/" + current_platform_slice.next_tiles[scan_index] + ".gd" 
 					current_platform_slice = load(loadString)
 					break
-
+					
+		if(current_slice.spawns_enabled == true):
+			print("SPAWNS ENABLED")
+			var selected = rand_range(0, len(current_slice.spawns_list) - 1)
 			
+			var load_string = "res://src/enemies/" + current_slice.spawns_list[selected] + ".tscn"
+			
+			
+			if(rng.randf() < 0.1):
+				var new_instance = load(load_string).instance()
+				new_instance.position.y = (current_height + 17) * 8
+				new_instance.position.x = x * 8
+				add_child(new_instance)
+		else:
+			print("No spawns at x " + str(x))
+		
 	$TileMap.update_bitmask_region(Vector2(-1, -1), Vector2(1000, 30))
 
 func on_enemy_died(enemy, value):
