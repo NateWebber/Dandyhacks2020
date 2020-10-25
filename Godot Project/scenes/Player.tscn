@@ -1,7 +1,8 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/MiniWorldSprites/Characters/Soldiers/Melee/RedMelee/AxemanRed.png" type="Texture" id=2]
+[ext_resource path="res://assets/slash_fx/slashfx.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.44136
@@ -128,6 +129,42 @@ tracks/3/keys = {
 "args": [  ],
 "method": "done_attacking"
 } ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SwordBox/Sprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 5, 4, 5, 2, 1, 0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SwordBox/Sprite:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 9.07165, 0.264866 ), Vector2( 7.06309, -0.220723 ), Vector2( -9.73381, -1.25811 ), Vector2( -13.6406, -0.662163 ), Vector2( -13.6406, -0.662163 ), Vector2( 7.68111, 0.132435 ), Vector2( 13.3095, 1.80304e-06 ), Vector2( 13.3095, 1.80304e-06 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SwordBox/Sprite:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.05, 0.1, 0.55 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -433,7 +470,7 @@ position = Vector2( 0, -0.0371628 )
 texture = ExtResource( 2 )
 vframes = 6
 hframes = 6
-frame = 23
+frame = 33
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 "anims/Idle Left" = SubResource( 2 )
@@ -467,7 +504,16 @@ shape = SubResource( 31 )
 position = Vector2( 1.52412, 0.105112 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordBox"]
-position = Vector2( -10.9317, -0.105112 )
+position = Vector2( 8, -0.1 )
 shape = SubResource( 32 )
-disabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="SwordBox"]
+position = Vector2( 13.3095, 1.80304e-06 )
+scale = Vector2( 1.11206, 1.16809 )
+texture = ExtResource( 3 )
+hframes = 6
+frame = 1
 [connection signal="area_entered" from="SwordBox" to="." method="_on_SwordBox_area_entered"]

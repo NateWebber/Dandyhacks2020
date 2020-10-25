@@ -95,7 +95,9 @@ func _physics_process(delta):
 
 func hit(dmg, x_kb, y_kb, dir):
 	attacking = false
+
 	get_parent().find_node("PlayerHurtSound").play()
+
 	velocity.x = 0
 	print('Player was hit for ' + str(dmg) + ' damage!')
 	health -= dmg
