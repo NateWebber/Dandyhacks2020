@@ -99,4 +99,5 @@ anims/right = SubResource( 5 )
 tree_root = SubResource( 6 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 7 )
+[connection signal="tree_exited" from="." to="." method="_on_green_slime_tree_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
