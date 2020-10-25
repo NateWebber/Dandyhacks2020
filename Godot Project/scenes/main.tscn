@@ -40,3 +40,4 @@ position = Vector2( 118.491, 112.691 )
 [node name="transition" type="CanvasLayer" parent="."]
 
 [node name="SceneTransitionRect" parent="transition" instance=ExtResource( 6 )]
+visible = false
