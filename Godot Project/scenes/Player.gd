@@ -90,6 +90,7 @@ func _physics_process(delta):
 		#	animationState.travel("Idle Left")
 
 func hit(dmg, x_kb, y_kb, dir):
+	attacking = false
 	velocity.x = 0
 	print('Player was hit for ' + str(dmg) + ' damage!')
 	print('Current health: ' + str(health))

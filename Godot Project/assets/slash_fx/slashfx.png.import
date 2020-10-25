@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/AxeSlashEffect (4).png-7daeaf2a25732c7be30430f68b587981.stex"
+path="res://.import/slashfx.png-503b732f6c0b5bc7d306ac78805be0f1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/slash_fx/AxeSlashEffect (4).png"
-dest_files=[ "res://.import/AxeSlashEffect (4).png-7daeaf2a25732c7be30430f68b587981.stex" ]
+source_file="res://assets/slash_fx/slashfx.png"
+dest_files=[ "res://.import/slashfx.png-503b732f6c0b5bc7d306ac78805be0f1.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
