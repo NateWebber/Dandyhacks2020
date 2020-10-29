@@ -14,6 +14,12 @@ export var run_speed = 60
 export var jump_speed = -200
 export var gravity = 600
 
+var jump_delay_counter = 0
+var jump_delay = 0.4
+var can_jump = true
+var x_accel = 10
+var x_decel = 20
+
 const UP_DIRECTION = Vector2(0, -1)
 
 onready var explosion = preload("res://scenes/explosion.tscn")
@@ -45,23 +51,30 @@ func _ready():
 	strength = 1
 	disabled = false
 	visible = true
-	attacking=false
-	knocked=false
+	attacking = false
+	knocked = false
 
 func get_input():
-	velocity.x = 0
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
 	var jump = Input.is_action_pressed("ui_up")
 	
-	if jump and is_on_floor():
+	if jump and is_on_floor() and can_jump:
 		jumping = true
 		velocity.y = jump_speed
+		can_jump = false
 		get_parent().find_node("Jump").play()
-	if right:
-		velocity.x += run_speed
-	if left:
-		velocity.x -= run_speed
+	if right or left:
+		print(velocity.x)
+		if right:
+			velocity.x = run_speed if velocity.x + x_accel >= run_speed else velocity.x + x_accel
+		if left:
+			velocity.x = -1 * run_speed if velocity.x - x_accel <= -1 * run_speed else velocity.x - x_accel
+	else:
+		if velocity.x < 0:
+			velocity.x = 0 if velocity.x - x_decel < 0 else velocity.x - x_decel
+		else:
+			velocity.x = 0 if velocity.x + x_decel > 0 else velocity.x + x_decel
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -70,8 +83,12 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	if jumping:
 		attacking = false	
-	if jumping and is_on_floor():
+	if not can_jump and is_on_floor():
 		jumping = false
+		jump_delay_counter += delta
+		if jump_delay_counter > jump_delay:
+			can_jump = true
+			jump_delay_counter = 0
 	if knocked and is_on_floor():
 		knocked = false
 	velocity = move_and_slide(velocity, UP_DIRECTION)
